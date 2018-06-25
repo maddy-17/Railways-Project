@@ -42,6 +42,7 @@ $(function(){
          });
         return theDataToAdd;
     }
+    
     $('.content').on('submit',event=>{
       event.preventDefault();
 
@@ -234,7 +235,6 @@ function myfn(a){
       w.style.display = 'none';
       w.removeAttribute("required"); 
     }
-  location.reload();
 }
 
 function deptfn(){

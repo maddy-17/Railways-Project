@@ -85,7 +85,7 @@ input#submit:hover{
 	margin: 2px auto 2px auto;
 }
 
-.submitbutton button[type='submit']{
+.submitbutton button{
 	background-color: black;
 	color: white;
 	font-size: 20px;

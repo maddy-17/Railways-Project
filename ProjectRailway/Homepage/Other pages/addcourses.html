@@ -29,7 +29,7 @@
             </div>
         </nav>
             
-        <form class="content" >
+        <form class="content">
             <div class="courseDetails" >
                 
                 <div class="dip" id="firstip">	
@@ -41,7 +41,7 @@
                     </p>
 
                     <div class="submitbutton">
-                    <button type="submit" >Submit</button>
+                    <button type="button" id="button1" >Check</button>
                     </div>
                 </div>
 
@@ -51,21 +51,21 @@
                     <p>Designation: </p>
                 </div>
 
-                <div class="dip" id="addDetails">
+                <div class="dip" id="addDetails" style="display: none;">
                     <p>Course ID: 
-                            <input id="courseId" type="text" name="courseId"  size="30" >
+                            <input id="courseId" class="req" type="text" name="courseId"  size="30" required>
                     </p>
                     <p>Course Name: 
-                            <input id="courseName" type="text" name="courseName"  size="30" >
+                            <input id="courseName" class="req" type="text" name="courseName"  size="30" required>
                     </p>
                     <p>Duration:
                         <div id="dur">
-                        <input id="durs" type="date" name="durs">
-                        <input id="dure" type="date" name="dure" >
+                        <input id="durs" class="req" type="date" name="durs" required>
+                        <input id="dure" class="req" type="date" name="dure" required>
                         </div>
                     </p><!--calculate year-->
                     <p>Department: 
-                        <select id="dept" name="dept" onchange ="deptfn()" >
+                        <select id="dept" class="req" name="dept" onchange ="deptfn()" required>
                                 <option value="signal">Signal</option>
                                 <option value="telecom">Telecom</option>
                                 <option value="others">Others</option>
@@ -75,7 +75,7 @@
                             </p>
                     </p>
                     <div class="submitbutton">
-                            <button type="submit" >Submit</button>
+                        <button type="submit" id="button2">Submit</button>
                     </div>
                 </div>
             </div>
@@ -84,6 +84,7 @@
         <footer id="main-footer">
             <p>Copyright &copy; 2018 Designed by VAM</p>
         </footer>
+
 		<script src="main3.js"></script>
         
 	</body>

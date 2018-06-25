@@ -9,8 +9,9 @@ $(function(){
     };
   
     firebase.initializeApp(config);
-  
+
     var temp = prompt("Do u have a PF number? ( Y / N )");
+
     if(temp == 'N') {
         var usr = document.getElementById('pfNo');
         usr.removeAttribute('required');
@@ -22,58 +23,74 @@ $(function(){
         function dispdata(){
             var usr = document.getElementById('displayData');
             usr.style.display = 'block';
-            console.log('hi');
+          
         }
 
         function cnfusr(id){
             var usersRef = firebase.database().ref('/Users/TempUsers');
             usersRef.child(id).once('value', function(snapshot) {
-            if (snapshot.exists()) {
-                dispdata();
-            }
-            else {
-              alert('The given Temperory ID '+ id + ' does not exist. Please give the correct ID or head over to "Add new Trainees" to create a new ID');
-            }
+                if (snapshot.exists()) {
+                    dispdata();
+                    var x=$('#addDetails');
+                    x[0].style.display = 'block' ;
+                }
+                else {
+                    alert('The given Temperory ID '+ id + ' does not exist. Please give the correct ID or head over to "Add new Trainees" to create a new ID');
+                    $('.content').trigger('reset');              
+                    var x = $('.req');
+                    for( var i =0; i< x.length ;i++)
+                    {
+                        x[i].removeAttribute("required");
+                    }                  
+                }
            });
-      }
+        }
 
-      $('#firstip').on('submit',function(event){
-        event.preventDefault();
-        var id = $('#tempId').val();
-        cnfusr(id);
-      });
+        var glousr;
 
-      $('#addDetails').on('submit',event=>{
-        event.preventDefault();
-  
-        var courseId = $('#courseId').val();
-        var courseName = $('#courseName').val();
-        var durs = $("#durs").val();
-        var dure = $("#dure").val();
-        var dept = $("#dept").val();
-
-        var theDataToAdd = $('#tempId').val();
-        
-        var usersRef = firebase.database().ref('/Courses/TempUsers/'+theDataToAdd);
-  
-        usersRef.child(courseId).once('value', function(snapshot) {
-          if (snapshot.exists()) {
-            alert('The course '+courseId+', '+courseName+' has already been registered, please specify only new courses');
-            $('#addDetails').trigger('reset');
-            
-          }
-          else{
-            firebase.database().ref('/Courses/TempUsers/' + theDataToAdd).set({
-              courseId,
-              courseName,
-              durs,
-              dure,
-              dept
-            });
-          }
+        $('#button1').on('click',event=>{
+            event.preventDefault();
+            document.getElementById('displayData').style.display = 'none';
+            glousr = $('#tempId').val();
+            if(glousr == ""){
+                alert('Enter a valid Temperory ID. DO NOT leave it empty');
+            }
+            cnfusr(glousr);
         });
-        $('#addDetails').trigger('reset');
-      });
+
+        $('.content').on('submit',event=>{
+            event.preventDefault();
+            var courseId = $('#courseId').val();
+            var courseName = $('#courseName').val();
+            var durs = $("#durs").val();
+            var dure = $("#dure").val();
+            var dept = $("#dept").val();
+
+            var theDataToAdd = glousr;
+
+                var usersRef = firebase.database().ref('/Courses/TempUsers/'+theDataToAdd);
+        
+                usersRef.child(courseId).once('value', function(snapshot) {
+                if (snapshot.exists()) {
+                    alert('The course '+courseId+', '+courseName+' has already been registered, please specify only new courses');
+                    $('.content').trigger('reset');
+                    
+                }
+                else{
+                    firebase.database().ref('/Courses/TempUsers/' + theDataToAdd).child(courseId).set({
+                    courseId,
+                    courseName,
+                    durs,
+                    dure,
+                    dept
+                    });
+                    alert('Course '+courseId+', '+courseName+' is successfully registered' );
+                    $('.content').trigger('reset');
+                    
+                }
+                });
+            
+        });
     }
   
     //perm user add course
@@ -82,8 +99,7 @@ $(function(){
         usr.removeAttribute('required');
     
         function dispdatap(){
-
-            var usr = document.getElementById('displaydata');
+            var usr = document.getElementById('displayData');
             usr.style.display = 'block';
         }
 
@@ -92,89 +108,95 @@ $(function(){
             usersRef.child(id).once('value', function(snapshot) {
                 if (snapshot.exists()) {
                     dispdatap();
+                    var x=$('#addDetails');
+                    console.log(x);
+                    x[0].style.display = 'block' ;
                 }
                 else {
-                alert('The given PF Number '+ id + ' does not exist. Please give the correct ID or head over to "Add new Trainees" to create a new ID');
+                    alert('The given PF Number '+ id + ' does not exist. Please give the correct ID or head over to "Add new Trainees" to create a new ID');
+                    $('.content').trigger('reset');
+                    var x = $('.req');
+                    for( var i =0; i< x.length ;i++)
+                    {
+                        x[i].removeAttribute("required");
+                    }        
                 }
             });
         }
-
-        $('#firstip').on('submit',event=>{
+        var glousr;
+        $('#button1').on('click',event=>{
             event.preventDefault();
-            var id = $('#pfNo').val();
-            cnfusrp(id);
-            console.log('hi');
+            glousr = $('#pfNo').val();
+            document.getElementById('displayData').style.display = 'none';            
+            if(glousr == ""){
+                alert('Enter a valid PF Number. DO NOT leave it empty');
+            }
+            cnfusrp(glousr);
+
         });
 
+        $('.content').on('submit',event=>{
+            event.preventDefault();
+            var courseId = $('#courseId').val();
+            var courseName = $('#courseName').val();
+            var durs = $("#durs").val();
+            var dure = $("#dure").val();
+            var dept = $("#dept").val();
 
-      $('#addDetails').on('submit',event=>{
-        event.preventDefault();
-  
-        var courseId = $('#courseId').val();
-        var courseName = $('#courseName').val();
-        var durs = $("#durs").val();
-        var dure = $("#dure").val();
-        var dept = $("#dept").val();
+            var theDataToAdd = glousr;
 
-        var theDataToAdd = $('#pfNo').val();
+                var usersRef = firebase.database().ref('/Courses/PermUsers/'+theDataToAdd);
         
-        var usersRef = firebase.database().ref('/Courses/PermUsers/'+theDataToAdd);
-  
-        usersRef.child(courseId).once('value', function(snapshot) {
-          if (snapshot.exists()) {
-            alert('The course '+courseId+', '+courseName+' has already been registered, please specify only new courses');
-           $('#addDetails').trigger('reset');
-            
-          }
-          else{
-            firebase.database().ref('/Courses/PermUsers/' + theDataToAdd).set({
-              courseId,
-              courseName,
-              durs,
-              dure,
-              dept
-            });
-          }
+                usersRef.child(courseId).once('value', function(snapshot) {
+                if (snapshot.exists()) {
+                    alert('The course '+courseId+', '+courseName+' has already been registered, please specify only new courses');
+                    $('.content').trigger('reset');
+                }
+                else{
+                    firebase.database().ref('/Courses/PermUsers/' + theDataToAdd).child(courseId).set({
+                    courseId,
+                    courseName,
+                    durs,
+                    dure,
+                    dept
+                    });
+                    alert('Course '+courseId+', '+courseName+' is successfully registered' );
+                    location.reload();
+                    
+                }
+                });
         });
-        $('#addDetails').trigger('reset');
-      });
     }
-      
       
     firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        // User is signed in.
-      } else {
-        // No user is signed in.
-        window.location='../../index.html';
-      }
+        if (user) {
+            // User is signed in.
+        } else {
+            // No user is signed in.
+            window.location='../../index.html';
+        }
     });
-  });
-  
-  function uploadfile(){
-    
-  }
-  
-  function logout(){
-    firebase.auth().signOut();
-  }
 
-  function deptfn(){
- 
-    var x = document.getElementById('dept').value;
     
+});
+
+function logout(){
+    firebase.auth().signOut();
+}
+
+function deptfn(){
+    var x = document.getElementById('dept').value;
+
     if( x == 'others'){
-      var y = document.getElementById('deptNeed');
-      y.style.display = 'block';    
-      var z = document.getElementById('othDept');
-      z.required = 'true';
+        var y = document.getElementById('deptNeed');
+        y.style.display = 'block';    
+        var z = document.getElementById('othDept');
+        z.required = 'true';
     }
     else{
-      var y = document.getElementById('deptNeed');
-      y.style.display = 'none';
-      var z = document.getElementById('othDept');
-      z.removeAttribute("required");
-     
+        var y = document.getElementById('deptNeed');
+        y.style.display = 'none';
+        var z = document.getElementById('othDept');
+        z.removeAttribute("required");
     }
-  
-  }
+}
