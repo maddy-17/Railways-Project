@@ -12,22 +12,22 @@ $(function(){
   
     var temp = prompt("Do u have a PF number? ( Y / N )");
     if(temp == 'N') {
-      var usr = document.getElementById('pfNo');
-      usr.removeAttribute('required');
-      usr = document.getElementById('pfNeed');
-      usr.style.display = 'none';
-      usr = document.getElementById('tempNeed');
-      usr.style.display = 'block';
-  
-      function dispdata(){
-          var usr = document.getElementById('displayData');
-          usr.style.display = 'block';
-          console.log('hi');
-      }
+        var usr = document.getElementById('pfNo');
+        usr.removeAttribute('required');
+        usr = document.getElementById('pfNeed');
+        usr.style.display = 'none';
+        usr = document.getElementById('tempNeed');
+        usr.style.display = 'block';
 
-      function cnfusr(id){
-          var usersRef = firebase.database().ref('/Users/TempUsers');
-          usersRef.child(id).once('value', function(snapshot) {
+        function dispdata(){
+            var usr = document.getElementById('displayData');
+            usr.style.display = 'block';
+            console.log('hi');
+        }
+
+        function cnfusr(id){
+            var usersRef = firebase.database().ref('/Users/TempUsers');
+            usersRef.child(id).once('value', function(snapshot) {
             if (snapshot.exists()) {
                 dispdata();
             }
