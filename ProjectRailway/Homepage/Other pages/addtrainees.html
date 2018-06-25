@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Add Trainees</title>
+		<link rel="stylesheet" type="text/css" href="../../initstyle.css">
+		<link rel="stylesheet" type="text/css" href="style2.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
+	
+	</head>
+	<body>
+		<script src="main2.js"></script>
+	
+		
+			<header id="main-header">
+				<div class="container">
+				<h1>S&t training center, southern railways podanur</h1>
+				</div>
+			</header>
+
+			<nav id="navbar">
+				<div class="container">
+				<ul>
+					<li style="font-size: 25px; "><a href="../index.html">Home</a></li>
+					<li id="logout">
+						<div>
+							<input onclick="logout()" type="submit" value="Log Out" id="submit" style="font-size:25px;font-family: 'Bahnschrift';"/>
+						</div>
+					</li>
+				</ul>
+				</div>
+			</nav>
+
+			<form class="content">
+				<div class="personalDetails" >
+					<h2>Personal details</h2>
+					
+					<div class="dip">	
+
+					<p>Name
+						<input id="name" type="text" name="name"  size="30" required>
+					</p>
+					
+					<p>Father's Name
+						<input id="dadname" type="text" name="dadname" size="30" required>
+					</p>
+					
+					<p>Address
+						<input id="addr" type="text" name="addr"  size="30" maxlength="500" required>
+					</p>
+
+					<p>Phone 
+						
+						<input id="phSelf" type="text" placeholder="Self" name="phSelf" maxlength="10" required>
+						<br>
+						<input id="phEmer" type="text" placeholder="Emergency" name="phEmer" maxlength="10" required>
+					
+					</p>
+
+					<p>Sex :  
+						<input type="radio" name="sex" value="M" required/> Male
+						<input type="radio" name="sex" value="F"/>	Female
+						<input type="radio" name="sex" value="T" />Others
+					</p>
+					
+					<p>Date of birth
+						<input id="dob" type="date" name="dob" required>
+					</p>
+					
+					<p>Qualification
+						<input id="qual" type="text" name="qual" size="30" maxlength="500" required>
+					</p>
+
+					<p style="text-align: center;">Upload photo
+						<input type="file" name="photo" accept="image/*" id="fileinput" onclick="" />
+					</p>
+					</div>
+				</div>
+
+				<div class="medicalDetails">
+					<h2>Medical Details</h2>
+					<div class="dip">	
+					<p>Blood Group
+						<select id="bldGrp" name="bldGrp" required>
+							<option value="A+">A+</option>
+							<option value="A-">A-</option>
+							<option value="B+">B+</option>
+							<option value="B-">B-</option>
+							<option value="AB+">AB+</option>
+							<option value="AB-">AB-</option>
+							<option value="O+">O+</option>
+							<option value="O-">O-</option>
+						</select>
+					</p>
+					
+					<p>Drugs, allergic to:
+						<input id="drugs" type="text" name="drugs" required>
+					</p>
+					<p>Medical history<br>
+						<div class="chkbox">
+							<input type="checkbox" name="medHis" value="BP" onclick="myfn(1)"/> <h5>BP</h5>
+							<input id="detBp" type="text" name="detBp" placeholder="Details" style="display: none;">
+						</div>
+						
+						<div class="chkbox">
+							<input type="checkbox" name="medHis" value="Sugar" onclick="myfn(2)" /> <h5>Sugar</h5>
+							<input id="detSugar" type="text" name="detSugar" placeholder="Details" style="display: none;">
+						</div>
+						
+						<div class="chkbox">
+							<input type="checkbox" name="medHis" value="heartDisease" onclick="myfn(3)"/> <h5>Heart Diseases</h5>
+							<input id="detHeartDis" type="text" name="detHeartDis" placeholder="Details" style="display: none;">
+						</div>
+						
+						<div class="chkbox">
+							<input type="checkbox" name="medHis" value="Eye" onclick="myfn(4)" /><h5>Eye</h5>
+							<input id="detEye" type="text" name="detEye" placeholder="Details" style="display: none;">
+						</div>
+						
+						<input id="otherCmts" type="text" name="otherCmts" placeholder="Other ailments">
+					</p>
+					</div>
+				</div>					
+				
+				<div class="railwaysDetails">
+					<h2>Railways Details</h2>
+					<div class="dip">	
+					
+					<p>Designation
+						<input id="desig" type="text" name="desig" size="30" maxlength="500" required>
+					</p>
+
+					<p>Station
+						<input id="stn" type="text" name="stn" size="30" maxlength="500" required>
+					</p>
+
+					<p>Divsion
+						<input id="dvsn" type="text" name="dvsn" size="30" maxlength="500" required>
+					</p>
+						
+					<p>Zone
+						<select id="zone" name="zone" required>
+							<option value="CR">Central Railway, Mumbai CSTM</option>
+							<option value="EC">East Central Railway, Hajipur</option>
+							<option value="ECstR">East Coast Railway, Bhubaneshwar</option>
+							<option value="ER">Eastern Railway, Kolkata</option>
+							<option value="MR">Metro Railway, Kolkata</option>
+							<option value="NCR">North Central Railway, Alahabad</option>
+							<option value="NEFronR">North East Frontier Railway, Maligaon (Gauwhati)</option>
+							<option value="NER">North Eastern Railway, Gorakhpur</option>
+							<option value="NWR">North Western Railway, Jaipur</option>
+							<option value="NR">Northern Railway, New Delhi</option>
+							<option value="SCR">South Central Railway, Secunderabad</option>
+							<option value="SEC">South East Central, Bilaspur</option>
+							<option value="SER">South Eastern Railway, Kolkata</option>
+							<option value="SWR">South Western Railway, Bangalore</option>
+							<option value="SR">Southern Railways, Chennai</option>
+							<option value="WC">West Central Railway, Jabalpur</option>
+							<option value="WR">Western Railway, Mumbai (Churchgate)</option>
+						</select>
+					</p>
+
+					<p>Department
+						<select id="dept" name="dept" onchange ="deptfn()" required>
+							<option value="signal">Signal</option>
+							<option value="telecom">Telecom</option>
+							<option value="others">Others</option>
+						</select>
+						<p id="deptNeed" style="display: none;"> 
+							<input id="othDept" type="text" name="othDept" placeholder="Enter department name" size="30" maxlength="500">
+						</p>
+	
+					</p>
+
+					<p id="pfneed">PF Number
+						<input id="pfNo" type="text" name="pfNo" size="30" maxlength="500" required>
+					</p>
+
+					<p>Details of last RC/FC attended<br>
+						<div class="chkbox">
+							<input type="checkbox" name="chkRcFc" value="RC" onclick="myfn(5)"/>
+							<h5>RC</h5>
+							<input id="detRc" type="text" name="detRc" placeholder="Details" style="display: none;">
+						</div>
+						<div class="chkbox">
+							<input type="checkbox" name="chkRcFc" value="FC" onclick="myfn(6)"/>
+							<h5>FC</h5>
+							<input id="detFc" type="text" name="detFc" placeholder="Details" style="display: none;">
+						</div>
+					</p>
+					
+					<p>BCC No
+						<input id="bccNo" type="text" name="bccNo">
+					</p>
+
+					<p>THB No
+						<input id="thbNo" type="text" name="thbNo">
+					</p>
+					
+					<p>ECC No
+						<input id="eccNo" type="text" name="eccNo">
+					</p>
+					</div>
+				</div>
+
+				<textarea id="remarks" type="text" name="remarks" rows=6 cols=30 placeholder="Enter other remarks"></textarea>
+				<div class="submitbutton">
+					<button type="submit">Submit</button>
+				</div>
+			</form>
+			<footer id="main-footer">
+					<p>Copyright &copy; 2018 Designed by VAM</p>
+					</footer>
+	</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Add Trainees</title>
+		<link rel="stylesheet" type="text/css" href="../../initstyle.css">
+		<link rel="stylesheet" type="text/css" href="style3.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
+	
+	</head>
+	<body>
+	
+		<header id="main-header">
+            <div class="container">
+            <h1>S&t training center, southern railways podanur</h1>
+            </div>
+        </header>
+
+        <nav id="navbar">
+            <div class="container">
+            <ul>
+                <li style="font-size: 25px; "><a href="../index.html">Home</a></li>
+                <li id="logout">
+                    <div>
+                        <input onclick="logout()" type="submit" value="Log Out" id="submit" style="font-size:25px;font-family: 'Bahnschrift';"/>
+                    </div>
+                </li>
+            </ul>
+            </div>
+        </nav>
+            
+        <form class="content" >
+            <div class="courseDetails" >
+                
+                <div class="dip" id="firstip">	
+                    <p id="pfNeed">Enter PF Number: 
+                        <input id="pfNo" type="text" name="pfNo" size="30" maxlength="500" required>
+                    </p>
+                    <p id="tempNeed" style="display: none;">Enter Temperory ID Number: 
+                        <input id="tempId" type="text" name="tempId" size="30" maxlength="500" required>
+                    </p>
+
+                    <div class="submitbutton">
+                    <button type="submit" >Submit</button>
+                    </div>
+                </div>
+
+                <div id="displayData" style="display: none;">
+                    <p>Name: </p>
+                    <p>Father's Name: </p>
+                    <p>Designation: </p>
+                </div>
+
+                <div class="dip" id="addDetails">
+                    <p>Course ID: 
+                            <input id="courseId" type="text" name="courseId"  size="30" >
+                    </p>
+                    <p>Course Name: 
+                            <input id="courseName" type="text" name="courseName"  size="30" >
+                    </p>
+                    <p>Duration:
+                        <div id="dur">
+                        <input id="durs" type="date" name="durs">
+                        <input id="dure" type="date" name="dure" >
+                        </div>
+                    </p><!--calculate year-->
+                    <p>Department: 
+                        <select id="dept" name="dept" onchange ="deptfn()" >
+                                <option value="signal">Signal</option>
+                                <option value="telecom">Telecom</option>
+                                <option value="others">Others</option>
+                            </select>
+                            <p id="deptNeed" style="display: none;"> 
+                                <input id="othDept" type="text" name="othDept" placeholder="Enter department name" size="30" maxlength="500">
+                            </p>
+                    </p>
+                    <div class="submitbutton">
+                            <button type="submit" >Submit</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <footer id="main-footer">
+            <p>Copyright &copy; 2018 Designed by VAM</p>
+        </footer>
+		<script src="main3.js"></script>
+        
+	</body>
+</html>

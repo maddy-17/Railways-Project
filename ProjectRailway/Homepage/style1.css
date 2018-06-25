@@ -1,0 +1,94 @@
+#main-header{
+	background-image:url('Images/hd.jpg');
+	color: black;
+}
+
+#navbar{
+	background-image:url('Images/nvb.jpg');	
+}
+
+#navbar ul{
+	margin: 0;
+}
+
+input#submit{
+    background:none;
+  	border:none;
+ 	color:white;
+    cursor: pointer;
+	outline: none;
+	margin: 7px;
+}
+
+input#submit:hover{
+    background-color:rgba(255,255 ,255 , 0.8);
+  	border:none;
+ 	color:black;
+    cursor: pointer;
+	outline: none;
+	margin: 7px;
+	border-radius: 5px;
+	font-size: x-large;
+
+}
+
+#logout{
+	float:right;
+}
+
+.content{
+	background-image: url('Images/bg.jpg');
+	text-align: center;
+	display: flex;
+	padding-bottom: 29px;
+	padding-top: 29px;
+}
+
+.card {
+	box-shadow: 6px 6px 10px 0 rgba(253, 255, 113, 0.4);
+	background-color: red;
+   	border-radius: 10px; 
+	width: 20%;
+	margin: 30px auto 30px auto;
+	transition-duration:0.2s; 
+	padding: 15px;
+}
+
+/* Add rounded corners to the top left and the top right corner of the image */
+.card img {
+	border-radius: 15px 15px 0 0;
+	width: 300px;
+	height: 300px;
+	transition-duration:0.2s;
+}
+
+/* On mouse-over, add a deeper shadow */
+.card:hover {
+	box-shadow: 6px 6px 10px 0 rgba(0, 0, 0, 0.8);
+	background-color: rgb(255, 255, 255);
+	cursor: pointer;
+	
+	transition-duration:0.2s;
+}
+.card:hover img{
+	background-color: white;
+	
+	transition-duration:0.2s;
+}
+.card:hover .containe{
+	background-color: black;
+	color: white;
+	font-family: 'Krona One', sans-serif;
+
+	transition-duration:0.2s;
+	
+}
+/* Add some padding inside the card container */
+.containe {
+	padding: 2px 16px;
+	background-color: azure;
+	border-radius: 10px;
+	margin-top: 7px;font-family: 'Krona One', sans-serif;
+
+	transition-duration:0.2s;
+}

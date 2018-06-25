@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Homepage</title>
+		<link rel="stylesheet" type="text/css" href="../initstyle.css">
+		<link rel="stylesheet" type="text/css" href="style1.css">
+		<link href="https://fonts.googleapis.com/css?family=Krona+One" rel="stylesheet">
+		<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
+
+
+	</head>
+	<body>
+			<header id="main-header">
+				<div class="container">
+				<h1>S&t training center, southern railways podanur</h1>
+				</div>
+			</header>
+
+			<nav id="navbar">
+				<div class="container">
+				<ul>
+					<li id="logout">
+						<div>
+							<input onclick="logout()" type="submit" value="Log Out" id="submit" style="font-size:25px;font-family: 'Bahnschrift';"/>
+						</div>
+					</li>
+				</ul>
+				</div>
+			</nav>
+			
+			<div class="content">		
+				<div class="card" onclick="location.href='Other pages/addtrainees.html';">
+						<img src="Images/addusr.png" alt="Add user" style="width:100%">
+						<div class="containe">
+							<h4><b>Add New Trainees</b></h4>  
+						</div>
+				</div>
+				<div class="card" onclick="location.href='Other pages/addcourses.html';">
+					<img src="Images/addcourse.png" alt="Add user" style="width:100%">
+					<div class="containe">
+						<h4><b>Add Course Data to Existing Trainees</b></h4> 
+					</div>
+			</div>
+				<div class="card" onclick="location.href='Other pages/searchdb.html';">
+					<img src="Images/search.png" alt="Add user" style="width:100%">
+					<div class="containe">
+						<h4><b>Retrieve Data</b></h4>  
+					</div>
+				</div>
+		
+			</div>
+	
+
+		<footer id="main-footer">
+		<p>Copyright &copy; 2018 Designed by VAM</p>
+		</footer>
+
+	<script>
+	  // Initialize Firebase
+	  var config = {
+	    apiKey: "AIzaSyDobO_q3o5vitRX53WoCDuz142XCVdsfeQ",
+	    authDomain: "learn1-5cc0d.firebaseapp.com",
+	    databaseURL: "https://learn1-5cc0d.firebaseio.com",
+	    projectId: "learn1-5cc0d",
+	    storageBucket: "learn1-5cc0d.appspot.com",
+	    messagingSenderId: "276613014482"
+	  };
+	  firebase.initializeApp(config);
+	</script>
+
+	<script src="main1.js"></script>
+	</body>
+</html>

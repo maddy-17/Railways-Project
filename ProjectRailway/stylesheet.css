@@ -1,0 +1,78 @@
+body{
+	background-image: url('Images/indian-train-wallpaper-14.jpg');
+	background-repeat: round;
+	background-position-y: center;
+}
+
+
+legend {
+	border-width: 100px;
+	color: black;
+	font-size: 20px;
+	background-color: honeydew;
+	border-radius: 8px;
+	padding-left: 5px;
+}
+.submitbuttom{
+	width:60%;
+	display: block;
+	padding:10px 10px ;
+	margin:auto;
+}
+
+.details{
+	width:50%;
+	margin:50px auto;
+	text-align: center;
+}
+
+
+.details .form-group{
+	padding-bottom:15px;
+}
+
+.details label{
+	display:block;
+}
+.details input[type="text"], .details input[type="Password"]{
+	padding:4px;
+	width:70%;
+	border-radius: 5px;
+	outline: none;
+	transition-duration: 0.1s;
+}
+.details input[type="text"]:focus, .details input[type="Password"]:focus{
+	padding:4px;
+	width:70%;
+	border-radius: 5px;
+	outline: none;
+	box-shadow: 0 0 2px 0 black;
+	border: 2px black solid;
+	transition-duration: 0.1s;
+}
+.details input[type="submit"]{
+	background-color: black;
+	color: white;
+	font-size: 20px;
+	border-radius: 15px;
+	width:100px;
+	outline: none;
+	font-family: 'Paytone One', sans-serif;
+	padding: 3px;
+	cursor: pointer;
+}
+.box{
+	width:60%;
+	margin:auto;
+	background-color: honeydew;
+	border-radius: 14px;
+	color: black;
+	font-weight: 600;
+	border: 3px black solid;
+	font-family: 'Ubuntu', sans-serif;
+}
+#main-footer{
+	position: absolute;
+}
+
+
