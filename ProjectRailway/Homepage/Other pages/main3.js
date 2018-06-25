@@ -20,17 +20,19 @@ $(function(){
         usr = document.getElementById('tempNeed');
         usr.style.display = 'block';
 
-        function dispdata(){
+        function dispdata(snapshot){
             var usr = document.getElementById('displayData');
             usr.style.display = 'block';
-          
+            $('#p1')[0].innerHTML = 'Name: ' + snapshot.child("name").val();
+            $('#p2')[0].innerHTML = "Father's Name: " + snapshot.child("dadname").val();
+            $('#p3')[0].innerHTML = "Designation: " + snapshot.child("desig").val();          
         }
 
         function cnfusr(id){
             var usersRef = firebase.database().ref('/Users/TempUsers');
             usersRef.child(id).once('value', function(snapshot) {
                 if (snapshot.exists()) {
-                    dispdata();
+                    dispdata(snapshot);
                     var x=$('#addDetails');
                     x[0].style.display = 'block' ;
                 }
@@ -55,7 +57,9 @@ $(function(){
             if(glousr == ""){
                 alert('Enter a valid Temperory ID. DO NOT leave it empty');
             }
-            cnfusr(glousr);
+            else{
+                cnfusr(glousr);
+            }
         });
 
         $('.content').on('submit',event=>{
@@ -98,18 +102,20 @@ $(function(){
         var usr = document.getElementById('tempId');
         usr.removeAttribute('required');
     
-        function dispdatap(){
+        function dispdatap(snapshot){
             var usr = document.getElementById('displayData');
             usr.style.display = 'block';
+            $('#p1')[0].innerHTML = 'Name: ' + snapshot.child("name").val();
+            $('#p2')[0].innerHTML = "Father's Name: " + snapshot.child("dadname").val();
+            $('#p3')[0].innerHTML = "Designation: " + snapshot.child("desig").val();
         }
 
         function cnfusrp(id){
             var usersRef = firebase.database().ref('/Users/PermUsers');
             usersRef.child(id).once('value', function(snapshot) {
                 if (snapshot.exists()) {
-                    dispdatap();
+                    dispdatap(snapshot);
                     var x=$('#addDetails');
-                    console.log(x);
                     x[0].style.display = 'block' ;
                 }
                 else {
@@ -131,8 +137,9 @@ $(function(){
             if(glousr == ""){
                 alert('Enter a valid PF Number. DO NOT leave it empty');
             }
+            else{
             cnfusrp(glousr);
-
+            }    
         });
 
         $('.content').on('submit',event=>{

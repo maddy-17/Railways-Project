@@ -1,12 +1,12 @@
 #main-header{
 	background-image:url('Images/topic.jpg');
-	color: black;
+	color:black;
 }
 
 #navbar{
 	background-image:url('Images/nvbar.jpg');
-	background-size: cover;
 }
+
 #logout{
 	float:right;
 }
