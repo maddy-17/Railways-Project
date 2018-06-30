@@ -1,16 +1,20 @@
 <html>
 	<head>
 		<title>Login Page</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Paytone+One|Ubuntu|Exo:600|Righteous|Stardos+Stencil:700" >
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="initstyle.css">
 		<link rel="stylesheet" type="text/css" href="stylesheet.css">
-		<link href="https://fonts.googleapis.com/css?family=Paytone+One|Ubuntu" rel="stylesheet">
-
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
 	<body>
 
 		<header id="main-header">
 			<div class="container">
-				<h1>S&t training center, southern railways podanur</h1>
+				<h1>S&T TRAINING CENTER, SOUTHERN RAILWAYS PODANUR</h1>
 			</div>
 		</header>
 
@@ -24,48 +28,33 @@
 		</nav>
 
 		<div class="details" >
-				<fieldset class="box">
-					<legend>
-						<b>LOGIN DETAILS:</b>
-					</legend>
-					<div class="form-group">
+			<fieldset class="box	">
+				<legend>
+					<b>LOGIN DETAILS:</b>
+				</legend>
+				<div class="form-group">
 					<label>
 						UserID
 					</label>
 						<input id="userid" type="text" size="30" required>
 					
-					</div>
-					<div class="form-group">
+				</div>
+				<div class="form-group">
 					<label>
 						Password
 					</label>
 						<input id="pwd" type="Password" size="30" required>
-					
-					</div>
-					
-				</fieldset>
-				<div class="submitbuttom">
+				</div>		
+			</fieldset>
+			
+			<div class="submitbuttom">
 				<input onclick="login()" type="submit" value="Log In" />
-				</div>
+			</div>
 		</div>
 
 		<footer id="main-footer">
-			<p>Copyright &copy; 2018 Designed by VAMS</p>
+			<p>Copyright &copy; 2018 Designed by VAM</p>
 		</footer>
-
-	<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
-	<script>
-	  // Initialize Firebase
-	  var config = {
-	    apiKey: "AIzaSyDobO_q3o5vitRX53WoCDuz142XCVdsfeQ",
-	    authDomain: "learn1-5cc0d.firebaseapp.com",
-	    databaseURL: "https://learn1-5cc0d.firebaseio.com",
-	    projectId: "learn1-5cc0d",
-	    storageBucket: "learn1-5cc0d.appspot.com",
-	    messagingSenderId: "276613014482"
-	  };
-	  firebase.initializeApp(config);
-	</script>
 
 	<script src="main.js"></script>
 	</body>

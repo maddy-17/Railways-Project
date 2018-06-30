@@ -1,3 +1,7 @@
+body{
+	background-image: url('Images/bg.jpg');
+
+}
 #main-header{
 	background-image:url('Images/hd.jpg');
 	color: black;
@@ -28,7 +32,6 @@ input#submit:hover{
 	outline: none;
 	margin: 7px;
 	border-radius: 5px;
-	font-size: x-large;
 
 }
 
@@ -37,58 +40,74 @@ input#submit:hover{
 }
 
 .content{
-	background-image: url('Images/bg.jpg');
 	text-align: center;
-	display: flex;
 	padding-bottom: 29px;
 	padding-top: 29px;
 }
 
-.card {
-	box-shadow: 6px 6px 10px 0 rgba(253, 255, 113, 0.4);
+.card{
+	box-shadow: 5px 5px 5px 0 rgba(255,255 ,255 , 0.4);
 	background-color: red;
    	border-radius: 10px; 
-	width: 20%;
-	margin: 30px auto 30px auto;
 	transition-duration:0.2s; 
 	padding: 15px;
+	width: 70%;
+	margin: 20px auto;
+	min-width: 280px;
+	max-width: 350px;
 }
 
-/* Add rounded corners to the top left and the top right corner of the image */
-.card img {
+.card img{
 	border-radius: 15px 15px 0 0;
 	width: 300px;
 	height: 300px;
 	transition-duration:0.2s;
 }
 
-/* On mouse-over, add a deeper shadow */
 .card:hover {
 	box-shadow: 6px 6px 10px 0 rgba(0, 0, 0, 0.8);
 	background-color: rgb(255, 255, 255);
 	cursor: pointer;
-	
 	transition-duration:0.2s;
 }
+
 .card:hover img{
-	background-color: white;
-	
+	background-color: white;	
 	transition-duration:0.2s;
 }
+
 .card:hover .containe{
 	background-color: black;
 	color: white;
 	font-family: 'Krona One', sans-serif;
-
 	transition-duration:0.2s;
-	
 }
-/* Add some padding inside the card container */
+
 .containe {
 	padding: 2px 16px;
 	background-color: azure;
 	border-radius: 10px;
 	margin-top: 7px;font-family: 'Krona One', sans-serif;
-
 	transition-duration:0.2s;
+}
+
+#card3, #card2{
+	margin-bottom: 60px;
+}
+
+
+#main-footer{
+	position: fixed;
+}
+
+@media screen and (min-width: 601px) {
+input#submit{
+	  font-size: x-large;
+	}
+  }
+
+@media screen and (max-width: 600px) {
+	input#submit{
+		font-size: large;
+	}
 }

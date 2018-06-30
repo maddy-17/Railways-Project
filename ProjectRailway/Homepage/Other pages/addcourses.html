@@ -1,28 +1,31 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Add Trainees</title>
+        <title>Add Courses</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Paytone+One|Exo:600|Righteous|Stardos+Stencil:700|Alfa+Slab+One|Monda:700" >
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="../../initstyle.css">
 		<link rel="stylesheet" type="text/css" href="style3.css">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-		<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
-	
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
 	<body>
 	
 		<header id="main-header">
             <div class="container">
-            <h1>S&t training center, southern railways podanur</h1>
+            <h1>S&T TRAINING CENTER, SOUTHERN RAILWAYS PODANUR</h1>
             </div>
         </header>
 
         <nav id="navbar">
             <div class="container">
             <ul>
-                <li style="font-size: 25px; "><a href="../index.html">Home</a></li>
+                <li><a href="../index.html">Home</a></li>
                 <li id="logout">
                     <div>
-                        <input onclick="logout()" type="submit" value="Log Out" id="submit" style="font-size:25px;font-family: 'Bahnschrift';"/>
+                        <input onclick="logout()" type="submit" value="Log Out" id="submit" style="font-family: 'Exo';"/>
                     </div>
                 </li>
             </ul>
@@ -45,7 +48,8 @@
                     </div>
                 </div>
 
-                <div id="displayData" style="display: none;">
+                <div class="dip" id="displayData" style="display: none;">
+                    <p style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; font-size: x-large;">Trainee Details</p>
                     <p id="p1">Name: </p>
                     <p id="p2">Father's Name: </p>
                     <p id="p3">Designation: </p>

@@ -41,6 +41,8 @@ input#submit:hover{
 
 .courseDetails{
 	width:40%;
+	min-width: 300px;
+
 	background-color: rgb(245, 255, 151);
 	margin: 45px auto 45px auto;
 	font-family: 'Comic Sans MS';
@@ -82,6 +84,7 @@ input#submit:hover{
 
 .dip{
 	width: 65%;
+	min-width: 250px;
 	margin: 2px auto 2px auto;
 }
 
@@ -117,3 +120,29 @@ select:focus{
 	box-shadow:0 0 10px 0px rgb(245, 6, 6);
 	transition-duration: 0.3s;
 }
+
+#displayData{
+	border-radius: 10px;
+	border: 2px black solid;
+	background-color: rosybrown;
+	margin-top: 10px; 
+}
+
+#displayData p{
+	margin: 5px 0;
+}
+
+@media screen and (min-width: 601px) {
+	li, li a{
+		  font-size: x-large;
+	}
+
+
+}
+
+	
+	@media screen and (max-width: 600px) {
+		li, li a{
+			font-size: large;
+		}
+	}

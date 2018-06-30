@@ -1,3 +1,12 @@
+var config = {
+	apiKey: "AIzaSyClPLO1GbsuZ8nIp2Fz1clJFbNvJYN9r4g",
+	authDomain: "southernrailwayapp.firebaseapp.com",
+	databaseURL: "https://southernrailwayapp.firebaseio.com",
+	projectId: "southernrailwayapp",
+	storageBucket: "southernrailwayapp.appspot.com",
+	messagingSenderId: "454464183095"
+};
+firebase.initializeApp(config);
 
 function login(){
 	var userid=document.getElementById("userid").value;
@@ -10,7 +19,6 @@ function login(){
 	  // ...
 	  window.alert("Error : " + errorMessage);
 	});
-
 }
 
 firebase.auth().onAuthStateChanged(user => {

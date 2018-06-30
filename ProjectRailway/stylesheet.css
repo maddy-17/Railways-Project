@@ -1,17 +1,21 @@
 body{
 	background-image: url('Images/indian-train-wallpaper-14.jpg');
-	background-repeat: round;
-	background-position-y: center;
+	background-repeat: no-repeat;
+	background-size: cover;
 }
-
-
+#navbar a{
+	
+	font-size: x-large;
+}
 legend {
 	border-width: 100px;
 	color: black;
 	font-size: 20px;
 	background-color: honeydew;
 	border-radius: 8px;
-	padding-left: 5px;
+	padding: 5px;
+	border-bottom: none; 
+	width: auto;
 }
 .submitbuttom{
 	width:60%;
@@ -21,7 +25,7 @@ legend {
 }
 
 .details{
-	width:50%;
+	width:70%;
 	margin:50px auto;
 	text-align: center;
 }
@@ -62,7 +66,8 @@ legend {
 	cursor: pointer;
 }
 .box{
-	width:60%;
+	max-width: 450px;
+	min-width: 210px;
 	margin:auto;
 	background-color: peachpuff;
 	border-radius: 14px;
@@ -70,9 +75,22 @@ legend {
 	font-weight: 600;
 	border: 3px black solid;
 	font-family: 'Ubuntu', sans-serif;
+	box-shadow: 0 0 25px 0 black;
 }
 #main-footer{
-	position: absolute;
+	position: fixed;
 }
 
+@media screen and (min-width: 601px) {
+	#navbar a{
+		  font-size: x-large;
+		}
+	  }
+
+	
+	@media screen and (max-width: 600px) {
+		#navbar a{
+			font-size: large;
+		}
+	}
 

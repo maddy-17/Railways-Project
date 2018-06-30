@@ -1,3 +1,9 @@
+*{
+    -webkit-box-sizing: none; 
+    -moz-box-sizing: none;
+    box-sizing: none;
+}
+
 body{
 	background-color:#f4f4f4;
 	color:black;
@@ -7,6 +13,7 @@ body{
 	margin:0;
 	outline: none;
 }
+
 .container{
 	width:80%;
 	margin:auto;
@@ -15,7 +22,7 @@ body{
 
 #main-header{
 	background-color:rgb(255,0,0);
-	font-family: stencil, sans-serif;
+	font-family: 'Stardos Stencil', serif;
     padding: 10px;
     color:#fff;
 	
@@ -32,7 +39,7 @@ h1{
     width: 100%;
 	background-color:#333;
 	color:#fff;
-	font-family: 'Bahnschrift';
+	font-family: 'Exo';
 }
 
 #navbar ul{
@@ -48,7 +55,6 @@ h1{
 #navbar a{
 	color:#fff;
 	text-decoration: none;
-	font-size:22px;
 	padding: 7px;
 	border-radius: 10px;
 	margin:0 5px 0 5px;
@@ -68,4 +74,20 @@ h1{
     text-align: center;
     width: 100%;
 	overflow: hidden;
+	font-family: 'Righteous';
+}
+#main-footer p{
+	margin: 16px 0;
+}
+@media screen and (min-width: 601px) {
+	h1{
+	  font-size: -webkit-xxx-large;
+	}
+  }
+  
+  /* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
+@media screen and (max-width: 600px) {
+	h1{
+		font-size: xx-large;
+	}
 }
