@@ -33,7 +33,7 @@ input#submit:hover{
 }
 .content{
 	background-image: url('Images/body.jpg');
-	background-size: contain;
+	background-size: cover;
 	background-repeat: round;
 	overflow: hidden;
 	text-align: center;
@@ -45,7 +45,7 @@ input#submit:hover{
 
 	background-color: rgb(245, 255, 151);
 	margin: 45px auto 45px auto;
-	font-family: 'Comic Sans MS';
+	font-family: 'Monda';
 	font-weight: bold;
 	overflow: hidden;
 	text-align: center;
@@ -107,7 +107,7 @@ select{
 	display: block;
 	width: 100%;
 	border-radius: 7px;
-	font-family: 'Comic Sans MS';
+	font-family: 'Monda';
 	outline: none;
 	border: 2px rgb(104, 103, 103) solid;
 	margin: 10px 0;

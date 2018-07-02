@@ -1,9 +1,11 @@
 <html>
 	<head>
-		<title>Add Trainees</title>
+		<title>Query Database</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-app.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-auth.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-database.js"></script>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Paytone+One|Exo:600|Righteous|Stardos+Stencil:700|Alfa+Slab+One|Monda:700" >
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="../../initstyle.css">
@@ -32,12 +34,154 @@
 
 			<form class="content">
 
-                <div id="queryDetails">
-                    
-                </div>
-				<div class="submitbutton">
-					<button type="submit">Submit</button>
+                <div class="queryDetails">
+					<div class="dip">
+                    <p>Select your query: 
+                        <select id="querySelect" onchange ="queryfn()" required>
+							<option value="" selected >Choose here</option>
+							
+							<optgroup label="Personal Details" style="font-style: italic;">
+								<option value="name">Name</option>
+								<option value="dadname">Father's Name</option>
+								<option value="phSelf">Phone Number</option>
+								<option value="dob">Date of Birth</option>
+								<option value="qual">Qualification</option>
+							</optgroup>
+
+							<optgroup label="Railways Details" style="font-style: italic;">
+								<option value="pfNo">PF NO</option>
+								<option value="tempId">Temperory ID</option>
+								<option value="desig">Designation</option>
+								<option value="stn">Station</option>
+								<option value="dvsn">Division</option>
+								<option value="zone">Zone</option>
+								<option value="dept">Department</option>
+								<option value="bccNo">BCC No.</option>
+								<option value="thbNo">THB No.</option>
+								<option value="eccNo">ECC No.</option>
+							</optgroup>
+						
+							<optgroup label="Medical Details" style="font-style: italic;">
+								<option value="bldGrp">Blood Group</option>
+							</optgroup>
+
+							<optgroup label="Course Details" style="font-style: italic;">
+
+							</optgroup>
+						</select>
+
+						<p id="nameNeed" style="display: none;"> 
+							<input id="name" type="text" placeholder="Enter name">
+						</p>
+						<p id="dadnameNeed" style="display: none;">
+							<input id="dadname" type="text" placeholder="Enter father's name">							
+						</p>
+						<p id="phSelfNeed" style="display: none;">
+							<input id="phSelf" type="text" placeholder="Enter Phone Number" maxlength="10">
+						</p>
+						<p id="dobNeed" style="display: none;">
+							<input id="dob" type="date">
+						</p>
+						<p id="qualNeed" style="display: none;">
+							<input id="qual" type="text" placeholder="Enter Qualification">						
+						</p>
+
+
+						<p id="pfNoNeed" style="display: none;"> 
+							<input id="pfNo" type="text" placeholder="Enter PF NO" size="30" maxlength="50">
+						</p>
+						<p id="tempIdNeed" style="display: none;"> 
+							<input id="tempId" type="text" placeholder="Enter Temperory ID" size="30" maxlength="50">
+						</p>
+						<p id="desigNeed" style="display: none;">
+							<input id="desig" type="text" placeholder="Enter Designation">
+						</p>
+						<p id="stnNeed" style="display: none;">
+							<input id="stn" type="text" placeholder="Enter Station">							
+						</p>
+						<p id="dvsnNeed" style="display: none;">
+							<input id="dvsn" type="text" placeholder="Enter Division">
+						</p>
+						<p id="zoneNeed" style="display: none;">
+							<select id="zone">
+								<option value="CR">Central Railway, Mumbai CSTM</option>
+								<option value="EC">East Central Railway, Hajipur</option>
+								<option value="ECstR">East Coast Railway, Bhubaneshwar</option>
+								<option value="ER">Eastern Railway, Kolkata</option>
+								<option value="MR">Metro Railway, Kolkata</option>
+								<option value="NCR">North Central Railway, Alahabad</option>
+								<option value="NEFronR">North East Frontier Railway, Maligaon (Gauwhati)</option>
+								<option value="NER">North Eastern Railway, Gorakhpur</option>
+								<option value="NWR">North Western Railway, Jaipur</option>
+								<option value="NR">Northern Railway, New Delhi</option>
+								<option value="SCR">South Central Railway, Secunderabad</option>
+								<option value="SEC">South East Central, Bilaspur</option>
+								<option value="SER">South Eastern Railway, Kolkata</option>
+								<option value="SWR">South Western Railway, Bangalore</option>
+								<option value="SR">Southern Railways, Chennai</option>
+								<option value="WC">West Central Railway, Jabalpur</option>
+								<option value="WR">Western Railway, Mumbai (Churchgate)</option>
+							</select>							
+						</p>
+						<p id="deptNeed" style="display: none;">
+							<select id="dept">
+									<option value="signal">Signal</option>
+									<option value="telecom">Telecom</option>
+									<option value="others">Others</option>
+							</select>													
+						</p>
+						<p id="bccNoNeed" style="display: none;">
+								<input id="bccNo" type="text" placeholder="Enter BCC No.">							
+						</p>
+						<p id="thbNoNeed" style="display: none;">
+								<input id="thbNo" type="text" placeholder="Enter THB No.">							
+						</p>
+						<p id="eccNoNeed" style="display: none;">
+								<input id="eccNo" type="text" placeholder="Enter ECC No.">							
+						</p>
+						
+						<p id="bldGrpNeed" style="display: none">
+							<select id="bldGrp">
+								<option value="A+">A+</option>
+								<option value="A-">A-</option>
+								<option value="B+">B+</option>
+								<option value="B-">B-</option>
+								<option value="AB+">AB+</option>
+								<option value="AB-">AB-</option>
+								<option value="O+">O+</option>
+								<option value="O-">O-</option>
+							</select>
+						</p>
+					</p>
+					</div>
 				</div>
+
+				<div class="submitbutton">
+					<button type="submit">SUBMIT</button>
+				</div>
+
+				<button id="resetbtn" type="button" style="display: none;" onclick="resetfn()">RESET</button>
+				
+				<div id="displayUsers" style="display: none;">
+					<table class="table table-hover table-responsive">
+						<thead>
+							<tr>
+								<th>ID No.</th>
+								<th>Name</th>
+								<th>Father's Name</th>
+								<th>Phone</th>
+								<th>Emergency Contact</th>
+								<th>Blood Group</th>
+								<th>DOB</th>
+								<th>Designation</th>
+							</tr>
+						</thead>
+						<tbody id="userDet">
+						
+						</tbody>
+					</table>
+				</div>
+				
 			</form>
 			<footer id="main-footer">
 					<p>Copyright &copy; 2018 Designed by VAM</p>

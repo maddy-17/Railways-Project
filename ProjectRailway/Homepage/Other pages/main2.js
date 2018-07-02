@@ -60,6 +60,7 @@ $(function(){
         var dept = $("#dept").val();
         var othDept = $("#othDept").val();
         var pfNo = $("#pfNo").val();
+        var tempId = userid;
         var detRc = $("#detRc").val();
         var detFc = $("#detFc").val();
         var bccNo = $("#bccNo").val();
@@ -93,7 +94,8 @@ $(function(){
           zone,
           dept,
           othDept,
-          userid,
+          pfNo,
+          tempId,
           detRc,
           detFc,
           bccNo,
@@ -176,6 +178,7 @@ $(function(){
               zone,
               dept,
               othDept,
+              pfNo,
               detRc,
               detFc,
               bccNo,

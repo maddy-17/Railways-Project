@@ -8,7 +8,7 @@ var config = {
   };
 firebase.initializeApp(config);
 
-    $(function(){
+$(function(){
     
     function dispdata(snapshot){
         var usr = document.getElementById('displayData');

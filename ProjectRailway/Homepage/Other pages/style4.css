@@ -10,7 +10,9 @@
 #logout{
 	float:right;
 }
-
+form{
+	margin-bottom: 0px;
+}
 input#submit{
     background:none;
   	border:none;
@@ -33,19 +35,19 @@ input#submit:hover{
 }
 .content{
 	background-image: url('Images/body.jpg');
-	background-size: contain;
+	background-size: cover;
 	background-repeat: round;
 	overflow: hidden;
 	text-align: center;
 }
 
-.courseDetails{
+.queryDetails{
 	width:40%;
 	min-width: 300px;
 
 	background-color: rgb(245, 255, 151);
 	margin: 45px auto 45px auto;
-	font-family: 'Comic Sans MS';
+	font-family: 'Monda';
 	font-weight: bold;
 	overflow: hidden;
 	text-align: center;
@@ -63,32 +65,28 @@ input#submit:hover{
     outline: none;
     margin: 5px;
     transition-duration: 0.3s;
-
 }
 
 
 .content input[type="text"]:focus, input[type="date"]:focus{
-	padding: 5px;
-	width: 90%;
 	border: 3px rgb(245, 6, 6) solid;
 	box-shadow:0 0 10px 0px rgb(245, 6, 6);
 	transition-duration: 0.3s; 
-	border-radius: 7px;
-	outline: none;
     margin: 5px;    
 }
-#dur{
-    display: inline-flex;
-    width: 90%;
+option{
+	font-style: normal;
 }
-
 .dip{
 	width: 65%;
 	min-width: 250px;
 	margin: 2px auto 2px auto;
 }
+.submitbutton, #resetbtn{
+	margin-bottom: 20px;
+}
 
-.submitbutton button{
+.submitbutton button, #resetbtn{
 	background-color: black;
 	color: white;
 	font-size: 20px;
@@ -98,7 +96,6 @@ input#submit:hover{
 	font-family: 'Paytone One', sans-serif;
 	padding: 3px;
 	cursor: pointer;
-
 }
 #main-footer{
     position: relative;
@@ -107,7 +104,7 @@ select{
 	display: block;
 	width: 100%;
 	border-radius: 7px;
-	font-family: 'Comic Sans MS';
+	font-family: 'Monda';
 	outline: none;
 	border: 2px rgb(104, 103, 103) solid;
 	margin: 10px 0;
@@ -121,28 +118,31 @@ select:focus{
 	transition-duration: 0.3s;
 }
 
-#displayData{
-	border-radius: 10px;
-	border: 2px black solid;
-	background-color: rosybrown;
-	margin-top: 10px; 
-}
+#displayUsers{
+	width:80%;
+	min-width: 300px;
 
-#displayData p{
-	margin: 5px 0;
+	background-color: rgb(179, 253, 243);
+	margin: 25px auto;
+	font-family: 'Monda';
+	font-weight: bold;
+	overflow: hidden;
+	text-align: center;
+	border: 3px black solid;
+	border-radius: 15px;
+	padding: 10px;
+	box-shadow: 4px 7px 20px black;
 }
-
 @media screen and (min-width: 601px) {
 	li, li a{
 		  font-size: x-large;
 	}
-
-
-}
-
-	
+}	
 	@media screen and (max-width: 600px) {
 		li, li a{
 			font-size: large;
+		}
+		.table{
+			display: block;
 		}
 	}

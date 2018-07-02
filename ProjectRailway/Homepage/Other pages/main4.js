@@ -1,133 +1,12 @@
-$(function(){
-    var config = {
-        apiKey: "AIzaSyClPLO1GbsuZ8nIp2Fz1clJFbNvJYN9r4g",
-        authDomain: "southernrailwayapp.firebaseapp.com",
-        databaseURL: "https://southernrailwayapp.firebaseio.com",
-        projectId: "southernrailwayapp",
-        storageBucket: "southernrailwayapp.appspot.com",
-        messagingSenderId: "454464183095"
-      };
-      firebase.initializeApp(config);
-    
-    function dispdata(snapshot){
-        var usr = document.getElementById('displayData');
-        usr.style.display = 'block';
-        $('#p1')[0].innerHTML = 'Name: ' + snapshot.child("name").val();
-        $('#p2')[0].innerHTML = "Father's Name: " + snapshot.child("dadname").val();
-        $('#p3')[0].innerHTML = "Designation: " + snapshot.child("desig").val();          
-    }
-
-    function cnfusr(id, txtpath, txt){
-        var usersRef = firebase.database().ref('/Users/'+txtpath);
-        usersRef.child(id).once('value', function(snapshot) {
-            if (snapshot.exists()) {
-                dispdata(snapshot);
-                var x=$('#addDetails');
-                x[0].style.display = 'block' ;
-            }
-            else {
-                alert('The given'+ txt + id + ' does not exist. Please give the correct ID or head over to "Add new Trainees" to create a new user');
-                $('.content').trigger('reset');              
-                var x = $('.req');
-                for( var i =0; i< x.length ;i++)
-                {
-                    x[i].removeAttribute("required");
-                }                  
-            }
-       });
-    }
-
-    var glousr;
-    
-    function getusr(idpath, txtpath, txt){
-        document.getElementById('displayData').style.display = 'none';
-        glousr = $('#'+idpath).val();
-        if(glousr == ""){
-            alert('Enter a valid' + txt + 'DO NOT leave it empty');
-        }
-        else{
-            cnfusr(glousr,txtpath,txt);
-        }
-    }
-
-    function addData(txtpath){
-        var courseId = $('#courseId').val();
-        var courseName = $('#courseName').val();
-        var durs = $("#durs").val();
-        var dure = $("#dure").val();
-        var dept = $("#dept").val();
-        var othDept = $("#othDept").val();
-        var theDataToAdd = glousr;
-
-        var usersRef = firebase.database().ref('/Courses/' + txtpath + '/'+theDataToAdd);
-        usersRef.child(courseId).once('value', function(snapshot) {
-            if (snapshot.exists()) {
-                alert('The course '+courseId+', '+courseName+' has already been registered, please specify only new courses');
-                $('.content').trigger('reset');
-            }
-            else{
-                firebase.database().ref('/Courses/' + txtpath + '/' + theDataToAdd).child(courseId).set({
-                courseId,
-                courseName,
-                durs,
-                dure,
-                dept,
-                othDept
-                },function(error){
-                    if(error){
-                        alert(error);
-                    }
-                    else{
-                        alert('Course '+courseId+', '+courseName+' is successfully registered' );
-                    }
-                });
-                alert('Course '+courseId+', '+courseName+' is successfully registered' );
-                $('.content').trigger('reset');    
-            }
-        });
-    }
-
-    var temp = prompt("Do u have a PF number? ( Y / N )");
-
-    if(temp == 'N') {
-        var usr = document.getElementById('pfNo');
-        usr.removeAttribute('required');
-        usr = document.getElementById('pfNeed');
-        usr.style.display = 'none';
-        usr = document.getElementById('tempNeed');
-        usr.style.display = 'block';
-        var txtpath = "TempUsers";
-        var txt = " Temperory ID ";
-        var idpath = "tempId";
-
-        $('#button1').on('click',event=>{
-            event.preventDefault();
-            getusr(idpath,txtpath,txt);
-        });
-
-        $('.content').on('submit',event=>{
-            event.preventDefault();
-            addData(txtpath);
-        });
-    }
-
-    else{
-        var usr = document.getElementById('tempId');
-        usr.removeAttribute('required');
-        var txtpath = "PermUsers";
-        var txt = " PF Number ";
-        var idpath = "pfNo";
-
-        $('#button1').on('click',event=>{
-            event.preventDefault();
-            getusr(idpath,txtpath,txt);
-        });
-
-        $('.content').on('submit',event=>{
-            event.preventDefault();
-            addData(txtpath);
-        });
-    }
+var config = {
+    apiKey: "AIzaSyClPLO1GbsuZ8nIp2Fz1clJFbNvJYN9r4g",
+    authDomain: "southernrailwayapp.firebaseapp.com",
+    databaseURL: "https://southernrailwayapp.firebaseio.com",
+    projectId: "southernrailwayapp",
+    storageBucket: "southernrailwayapp.appspot.com",
+    messagingSenderId: "454464183095"
+    };
+    firebase.initializeApp(config);
     
 firebase.auth().onAuthStateChanged(user => {
     if (user) {
@@ -138,28 +17,127 @@ firebase.auth().onAuthStateChanged(user => {
     }
 });
 
+var txtPath = ["PermUsers", "TempUsers"];
+var txtId;
+var usr;
+var queries = [];
+
+function resetfn(){
+    $('tbody').empty();
+    $('#displayUsers')[0].style.display = 'none';
+    for(i in queries){
+        $('#' + queries[i] + 'Need')[0].style.display = 'none';
+        $('#' + queries[i] )[0].removeAttribute("required");  
+        qryremove(queries, queries[i]);    
+    }
+    $('.content').trigger('reset');   
+    $('#resetbtn')[0].style.display = 'none';
+
+}
+
+function dispUsers(snapshot){
+    var x = document.createElement("tr");
+    var y = [];
+    for( i=0; i<8; i++){
+        y[i] = document.createElement("td");
+    }
+    
+    if (( $('#tempId').val() != "")){
+        x.appendChild(y[0]).innerHTML = snapshot.child('tempId').val();       
+    }
+    else{
+        x.appendChild(y[0]).innerHTML = snapshot.child('pfNo').val();   
+    }
+    x.appendChild(y[1]).innerHTML = snapshot.child('name').val();
+    x.appendChild(y[2]).innerHTML = snapshot.child('dadname').val();
+    x.appendChild(y[3]).innerHTML = snapshot.child('phSelf').val();
+    x.appendChild(y[4]).innerHTML = snapshot.child('phEmer').val();
+    x.appendChild(y[5]).innerHTML = snapshot.child('bldGrp').val();
+    x.appendChild(y[6]).innerHTML = snapshot.child('dob').val();
+    x.appendChild(y[7]).innerHTML = snapshot.child('desig').val();
+    $('tbody').append(x);
+}
+
+function queryDb(txtPath, txtId){
+    $('#displayUsers')[0].style.display = 'block';
+    
+    for(i in txtPath){
+        var x = firebase.database().ref('/Users/' + txtPath[i]);
+        x.child(txtId).once('value',function(snapshot){
+            dispUsers(snapshot);
+        });
+    }
+}
+
+function newfn(){
+    $('#displayUsers')[0].style.display = 'block';
+    var len = queries.length;
+    for(i in queries){
+        len--;
+        for(j in txtPath){
+            var x = firebase.database().ref('/Users/' + txtPath[j]);
+
+            x.orderByChild(queries[i]).equalTo($('#' + queries[i]).val()).once('value').then(snaps =>{
+                snaps.forEach(function(snapshot){
+                    dispUsers(snapshot);
+                });
+            });
+        }
+    }
+}
+
+$('.content').on('submit',event=>{
+    event.preventDefault(); 
+    $('#resetbtn')[0].style.display = 'initial';
+    
+    if (( $('#pfNo').val() != "") && ( $('#tempId').val() != "")){
+        alert("Select only one among PF Number and Temperory ID. NOT BOTH !!!");
+        location.reload();
+    }
+    
+    if (( $('#pfNo').val() != "" ) && queries.length == 1 && queries[0] == "pfNo"){
+        txtPath = ['PermUsers'];
+        txtId = $('#pfNo').val();
+        queryDb(txtPath, txtId);
+        return;
+    }
+
+    if (( $('#tempId').val() != "") && queries.length == 1 && queries[0] == "tempId"){
+        txtPath=['TempUsers'];
+        txtId = $('#tempId').val();
+        queryDb(txtPath, txtId);
+        return;
+    }
+    newfn();
 });
 
 function logout(){
     firebase.auth().signOut();
-    window.location='../../index.html';
+}
 
+function qryremove(array, element) {
+    const index = array.indexOf(element);
+    
+    if (index !== -1) {
+        array.splice(index, 1);
+    }
 }
 
 
-function deptfn(){
-    var x = document.getElementById('dept').value;
-
-    if( x == 'others'){
-        var y = document.getElementById('deptNeed');
-        y.style.display = 'block';    
-        var z = document.getElementById('othDept');
-        z.required = 'true';
+  function queryfn(){
+    var x=$('#querySelect').val();
+    if(x == "")
+    return;
+    if($('#' + x + 'Need')[0].style.display == 'none'){
+        $('#' + x + 'Need')[0].style.display = 'block';
+        $('#' + x )[0].required = 'true';
+        queries.push(x);
     }
     else{
-        var y = document.getElementById('deptNeed');
-        y.style.display = 'none';
-        var z = document.getElementById('othDept');
-        z.removeAttribute("required");
+        $('#' + x + 'Need')[0].style.display = 'none';
+        $('#' + x )[0].removeAttribute("required");
+        qryremove(queries, x);
     }
+    console.log(queries);
 }
+
