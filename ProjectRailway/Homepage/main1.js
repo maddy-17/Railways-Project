@@ -7,9 +7,12 @@ var config = {
   messagingSenderId: "454464183095"
 };
 firebase.initializeApp(config);
-
+$(window).on('load', function() {
+	$('#loading').fadeOut(2000);
+});
 function logout(){
-	firebase.auth().signOut();
+  firebase.auth().signOut();
+	$('#loading').fadeIn("slow");  
 }
 
 firebase.auth().onAuthStateChanged(user => {
@@ -30,6 +33,7 @@ firebase.auth().onAuthStateChanged(user => {
     }
   } else {
     // No user is signed in.
-    window.location='../index.html'
+    window.location='../index.html';
+
   }
 });

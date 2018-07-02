@@ -60,7 +60,6 @@ $(function(){
         var dept = $("#dept").val();
         var othDept = $("#othDept").val();
         var pfNo = $("#pfNo").val();
-        var tempId = userid;
         var detRc = $("#detRc").val();
         var detFc = $("#detFc").val();
         var bccNo = $("#bccNo").val();
@@ -78,6 +77,7 @@ $(function(){
   
         
         var userid = cnfusr();
+        var tempId = userid;
         firebase.database().ref('Users/TempUsers/' + userid).set({
           name,
           dadname,

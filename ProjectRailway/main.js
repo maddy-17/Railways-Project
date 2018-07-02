@@ -8,6 +8,10 @@ var config = {
 };
 firebase.initializeApp(config);
 
+$(window).on('load', function() {
+	$('#loading').fadeOut("slow");
+});
+
 	function login(){
 		var userid=document.getElementById("userid").value;
 		var userpwd=document.getElementById("pwd").value;
@@ -15,8 +19,12 @@ firebase.initializeApp(config);
 		firebase.auth().signInWithEmailAndPassword(userid, userpwd).catch(function(error) {
 		  var errorCode = error.code;
 		  var errorMessage = error.message;
-		  window.alert("Error : " + errorMessage);
+			window.alert("Error : " + errorMessage);
+			$('#loading').hide();			
+			return;
 		});
+	$('#loading').fadeIn("slow");
+
 	}
 
 	firebase.auth().onAuthStateChanged(user => {

@@ -117,7 +117,6 @@ select:focus{
 	box-shadow:0 0 10px 0px rgb(245, 6, 6);
 	transition-duration: 0.3s;
 }
-
 #displayUsers{
 	width:80%;
 	min-width: 300px;
