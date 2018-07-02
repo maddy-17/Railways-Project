@@ -1,16 +1,14 @@
+var config = {
+  apiKey: "AIzaSyClPLO1GbsuZ8nIp2Fz1clJFbNvJYN9r4g",
+  authDomain: "southernrailwayapp.firebaseapp.com",
+  databaseURL: "https://southernrailwayapp.firebaseio.com",
+  projectId: "southernrailwayapp",
+  storageBucket: "southernrailwayapp.appspot.com",
+  messagingSenderId: "454464183095"
+};
+firebase.initializeApp(config);
 
 $(function(){
-  
-  var config = {
-    apiKey: "AIzaSyClPLO1GbsuZ8nIp2Fz1clJFbNvJYN9r4g",
-    authDomain: "southernrailwayapp.firebaseapp.com",
-    databaseURL: "https://southernrailwayapp.firebaseio.com",
-    projectId: "southernrailwayapp",
-    storageBucket: "southernrailwayapp.appspot.com",
-    messagingSenderId: "454464183095"
-  };
-  firebase.initializeApp(config);
-  
     var temp = prompt("Do u have a PF number? ( Y / N )");
     if(temp == 'N')
     {
@@ -193,18 +191,20 @@ $(function(){
               otherCmts,
               remarks
             });
+            alert('User with PF Number ' + pfNo + ' has been created');
           }
         });
         $('.content').trigger('reset');
       });
   
     }
-      
-      
-    $('#zone').chosen();
-    $('#dept').chosen();
+  });
+    
+  function logout(){
+    firebase.auth().signOut();
+  }
 
-    firebase.auth().onAuthStateChanged(user => {
+   firebase.auth().onAuthStateChanged(user => {
       if (user) {
         // User is signed in.
       } else {
@@ -212,18 +212,6 @@ $(function(){
         window.location='../../index.html';
       }
     });
-    
-  });
-  
-  function uploadfile(){
-    
-  }
-  
-  function logout(){
-    firebase.auth().signOut();
-    window.location='../../index.html';
-
-  }
 
   function myfn(a){
   

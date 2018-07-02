@@ -1,0 +1,148 @@
+#main-header{
+	background-image:url('Images/topic.jpg');
+	color:black;
+}
+
+#navbar{
+	background-image:url('Images/nvbar.jpg');
+}
+
+#logout{
+	float:right;
+}
+
+input#submit{
+    background:none;
+  	border:none;
+ 	color:white;
+    cursor: pointer;
+	outline: none;
+	margin: none;
+	padding: none;
+	border-radius: 5px;
+}
+input#submit:hover{
+    background-color:rgba(255,255 ,255 , 0.8);
+  	border:none;
+ 	color:black;
+    cursor: pointer;
+	outline: none;
+	border-radius: 5px;
+	transition-duration: .2s;
+
+}
+.content{
+	background-image: url('Images/body.jpg');
+	background-size: contain;
+	background-repeat: round;
+	overflow: hidden;
+	text-align: center;
+}
+
+.courseDetails{
+	width:40%;
+	min-width: 300px;
+
+	background-color: rgb(245, 255, 151);
+	margin: 45px auto 45px auto;
+	font-family: 'Comic Sans MS';
+	font-weight: bold;
+	overflow: hidden;
+	text-align: center;
+	border: 3px black solid;
+	border-radius: 15px;
+	padding: 10px;
+	box-shadow: 4px 7px 20px black;
+}
+
+.content input[type="text"], input[type="date"]{
+	padding: 5px;
+	width: 90%;
+	border: 2px rgb(104, 103, 103) solid;
+	border-radius: 7px;
+    outline: none;
+    margin: 5px;
+    transition-duration: 0.3s;
+
+}
+
+
+.content input[type="text"]:focus, input[type="date"]:focus{
+	padding: 5px;
+	width: 90%;
+	border: 3px rgb(245, 6, 6) solid;
+	box-shadow:0 0 10px 0px rgb(245, 6, 6);
+	transition-duration: 0.3s; 
+	border-radius: 7px;
+	outline: none;
+    margin: 5px;    
+}
+#dur{
+    display: inline-flex;
+    width: 90%;
+}
+
+.dip{
+	width: 65%;
+	min-width: 250px;
+	margin: 2px auto 2px auto;
+}
+
+.submitbutton button{
+	background-color: black;
+	color: white;
+	font-size: 20px;
+	border-radius: 15px;
+	width:100px;
+	outline: none;
+	font-family: 'Paytone One', sans-serif;
+	padding: 3px;
+	cursor: pointer;
+
+}
+#main-footer{
+    position: relative;
+}
+select{
+	display: block;
+	width: 100%;
+	border-radius: 7px;
+	font-family: 'Comic Sans MS';
+	outline: none;
+	border: 2px rgb(104, 103, 103) solid;
+	margin: 10px 0;
+	padding: 5px; 
+	text-align: center;
+	
+}
+select:focus{
+	border: 3px rgb(245, 6, 6) solid;
+	box-shadow:0 0 10px 0px rgb(245, 6, 6);
+	transition-duration: 0.3s;
+}
+
+#displayData{
+	border-radius: 10px;
+	border: 2px black solid;
+	background-color: rosybrown;
+	margin-top: 10px; 
+}
+
+#displayData p{
+	margin: 5px 0;
+}
+
+@media screen and (min-width: 601px) {
+	li, li a{
+		  font-size: x-large;
+	}
+
+
+}
+
+	
+	@media screen and (max-width: 600px) {
+		li, li a{
+			font-size: large;
+		}
+	}

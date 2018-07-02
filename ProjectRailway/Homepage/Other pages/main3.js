@@ -1,13 +1,14 @@
-$(function(){
-    var config = {
-        apiKey: "AIzaSyClPLO1GbsuZ8nIp2Fz1clJFbNvJYN9r4g",
-        authDomain: "southernrailwayapp.firebaseapp.com",
-        databaseURL: "https://southernrailwayapp.firebaseio.com",
-        projectId: "southernrailwayapp",
-        storageBucket: "southernrailwayapp.appspot.com",
-        messagingSenderId: "454464183095"
-      };
-      firebase.initializeApp(config);
+var config = {
+    apiKey: "AIzaSyClPLO1GbsuZ8nIp2Fz1clJFbNvJYN9r4g",
+    authDomain: "southernrailwayapp.firebaseapp.com",
+    databaseURL: "https://southernrailwayapp.firebaseio.com",
+    projectId: "southernrailwayapp",
+    storageBucket: "southernrailwayapp.appspot.com",
+    messagingSenderId: "454464183095"
+  };
+firebase.initializeApp(config);
+
+    $(function(){
     
     function dispdata(snapshot){
         var usr = document.getElementById('displayData');
@@ -128,7 +129,12 @@ $(function(){
             addData(txtpath);
         });
     }
-    
+});
+
+function logout(){
+    firebase.auth().signOut();
+}
+
 firebase.auth().onAuthStateChanged(user => {
     if (user) {
         // User is signed in.
@@ -137,15 +143,6 @@ firebase.auth().onAuthStateChanged(user => {
         window.location='../../index.html';
     }
 });
-
-});
-
-function logout(){
-    firebase.auth().signOut();
-    window.location='../../index.html';
-
-}
-
 
 function deptfn(){
     var x = document.getElementById('dept').value;

@@ -15,7 +15,7 @@ function logout(){
 firebase.auth().onAuthStateChanged(user => {
   if (user) {
     // User is signed in.
-    if(user.email == "admin@sttcsr.com")
+     if(user.email == "admin@sttcsr.com")
     {
       $('#card3')[0].style.display = 'block';
       $('#card3')[0].classList.add('col-lg-4');
@@ -25,6 +25,7 @@ firebase.auth().onAuthStateChanged(user => {
 
       $('#card2')[0].classList.remove('col-lg-6');
       $('#card2')[0].classList.add('col-lg-4');
+      $('#card2')[0].style.marginBottom = '0';
       
     }
   } else {
