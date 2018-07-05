@@ -6,6 +6,7 @@
 		<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-app.js"></script>
 		<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-auth.js"></script>
 		<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-database.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-storage.js"></script>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Paytone+One|Exo:600|Righteous|Stardos+Stencil:700|Alfa+Slab+One|Monda:700" >
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="../../initstyle.css">
@@ -33,7 +34,7 @@
 			</nav>
 
 			<form class="content">
-				<div class="personalDetails" >
+				<div class="personalDetails">
 					<h2>Personal details</h2>
 					
 					<div class="dip">	
@@ -52,16 +53,16 @@
 
 					<p>Phone 
 						
-						<input id="phSelf" type="text" placeholder="Self" name="phSelf" maxlength="10" required>
+						<input id="phSelf" type="number" placeholder="Self" name="phSelf" maxLength="11"  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" required>
 						<br>
-						<input id="phEmer" type="text" placeholder="Emergency" name="phEmer" maxlength="10" required>
+						<input id="phEmer" type="number" placeholder="Emergency" name="phEmer" maxLength="11"  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" required>
 					
 					</p>
 
 					<p>Sex :  
-						<input type="radio" name="sex" value="M" required/> Male
-						<input type="radio" name="sex" value="F"/>	Female
-						<input type="radio" name="sex" value="T" />Others
+						<div style="display: inline;"><input type="radio" name="sex" value="M"  required/> Male</div>
+						<div style="display: inline;"><input type="radio" name="sex" value="F"/> Female</div>
+						<div style="display: inline;"><input type="radio" name="sex" value="T" /> Others</div>
 					</p>
 					
 					<p>Date of birth
@@ -73,7 +74,8 @@
 					</p>
 
 					<p style="text-align: center;">Upload photo
-						<input type="file" name="photo" accept="image/*" id="fileinput" onclick="" />
+						<input type="file" value="upload" accept="image/*" id="fileButton"/>
+						<progress value="0" max="100" id="uploader" style="display: none;">0%</progress>
 					</p>
 					</div>
 				</div>
@@ -109,7 +111,7 @@
 						</div>
 						
 						<div class="chkbox">
-							<input type="checkbox" name="medHis" value="heartDisease" onclick="myfn(3)"/> <h5>Heart Diseases</h5>
+							<input type="checkbox" name="medHis" value="heartDisease" onclick="myfn(3)"/> <h5>Heart</h5>
 							<input id="detHeartDis" type="text" name="detHeartDis" placeholder="Details" style="display: none;">
 						</div>
 						
@@ -136,41 +138,51 @@
 					</p>
 
 					<p>Divsion
-						<input id="dvsn" type="text" name="dvsn" size="30" maxlength="500" required>
+						<select id="dvsn" name="dvsn" onchange ="deptfn('dvsn')" required>
+								<option value="Chennai">Chennai</option>
+								<option value="Madurai">Madurai</option>
+								<option value="Palakkad">Palakkad</option>
+								<option value="Salem">Salem</option>
+								<option value="Trivandrum">Thiruvananthapuram</option>
+								<option value="Trichy">Tiruchirappalli</option>
+								<option value="Others">Others</option>
+							</select>
+						<p id="dvsnNeed" style="display: none;"> 
+							<input id="othdvsn" type="text" placeholder="Enter Divsion name" size="30" maxlength="500">
+						</p>
 					</p>
 						
 					<p>Zone
 						<select id="zone" name="zone" required>
-							<option value="CR">Central Railway, Mumbai CSTM</option>
-							<option value="EC">East Central Railway, Hajipur</option>
-							<option value="ECstR">East Coast Railway, Bhubaneshwar</option>
-							<option value="ER">Eastern Railway, Kolkata</option>
-							<option value="MR">Metro Railway, Kolkata</option>
-							<option value="NCR">North Central Railway, Alahabad</option>
-							<option value="NEFronR">North East Frontier Railway, Maligaon (Gauwhati)</option>
-							<option value="NER">North Eastern Railway, Gorakhpur</option>
-							<option value="NWR">North Western Railway, Jaipur</option>
-							<option value="NR">Northern Railway, New Delhi</option>
-							<option value="SCR">South Central Railway, Secunderabad</option>
-							<option value="SEC">South East Central, Bilaspur</option>
-							<option value="SER">South Eastern Railway, Kolkata</option>
-							<option value="SWR">South Western Railway, Bangalore</option>
-							<option value="SR">Southern Railways, Chennai</option>
-							<option value="WC">West Central Railway, Jabalpur</option>
-							<option value="WR">Western Railway, Mumbai (Churchgate)</option>
+							<option value="Southern Railways, Chennai">Southern Railways, Chennai</option>
+							<option value="South Central Railway, Secunderabad">South Central Railway, Secunderabad</option>
+							<option value="South Eastern Railway, Kolkata">South Eastern Railway, Kolkata</option>
+							<option value="South Western Railway, Bangalore">South Western Railway, Bangalore</option>
+							<option value="South East Central, Bilaspur">South East Central, Bilaspur</option>
+							<option value="Central Railway, Mumbai CSTM">Central Railway, Mumbai CSTM</option>
+							<option value="East Central Railway, Hajipur">East Central Railway, Hajipur</option>
+							<option value="East Coast Railway, Bhubaneshwar">East Coast Railway, Bhubaneshwar</option>
+							<option value="Eastern Railway, Kolkata">Eastern Railway, Kolkata</option>
+							<option value="Metro Railway, Kolkata">Metro Railway, Kolkata</option>
+							<option value="North Central Railway, Alahabad">North Central Railway, Alahabad</option>
+							<option value="North East Frontier Railway, Maligaon (Gauwhati)">North East Frontier Railway, Maligaon (Gauwhati)</option>
+							<option value="North Eastern Railway, Gorakhpur">North Eastern Railway, Gorakhpur</option>
+							<option value="North Western Railway, Jaipur">North Western Railway, Jaipur</option>
+							<option value="Northern Railway, New Delhi">Northern Railway, New Delhi</option>
+							<option value="West Central Railway, Jabalpur">West Central Railway, Jabalpur</option>
+							<option value="Western Railway, Mumbai (Churchgate)">Western Railway, Mumbai (Churchgate)</option>
 						</select>
 					</p>
 
 					<p>Department
-						<select id="dept" name="dept" onchange ="deptfn()" required>
-							<option value="signal">Signal</option>
-							<option value="telecom">Telecom</option>
-							<option value="others">Others</option>
+						<select id="dept" name="dept" onchange ="deptfn('dept')" required>
+							<option value="Signal">Signal</option>
+							<option value="Telecom">Telecom</option>
+							<option value="Others">Others</option>
 						</select>
 						<p id="deptNeed" style="display: none;"> 
-							<input id="othDept" type="text" name="othDept" placeholder="Enter department name" size="30" maxlength="500">
-						</p>
-	
+							<input id="othdept" type="text" placeholder="Enter department name" size="30" maxlength="500">
+						</p>	
 					</p>
 
 					<p id="pfneed">PF Number

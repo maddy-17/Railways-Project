@@ -83,7 +83,7 @@ input#submit:hover{
 }
 
 .dip{
-	width: 65%;
+	width: 75%;
 	min-width: 250px;
 	margin: 2px auto 2px auto;
 }
@@ -105,12 +105,12 @@ input#submit:hover{
 }
 select{
 	display: block;
-	width: 100%;
+	width: 90%;
 	border-radius: 7px;
 	font-family: 'Monda';
 	outline: none;
 	border: 2px rgb(104, 103, 103) solid;
-	margin: 10px 0;
+	margin: 10px auto;
 	padding: 5px; 
 	text-align: center;
 	
@@ -144,5 +144,12 @@ select:focus{
 	@media screen and (max-width: 600px) {
 		li, li a{
 			font-size: large;
+		}
+		.dip{
+			width: 75%;
+		}
+		#dur{
+			display: block;
+			margin: auto;
 		}
 	}

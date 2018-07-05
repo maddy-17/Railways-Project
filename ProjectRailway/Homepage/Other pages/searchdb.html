@@ -6,13 +6,100 @@
 		<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-app.js"></script>
 		<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-auth.js"></script>
 		<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-database.js"></script>
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Paytone+One|Exo:600|Righteous|Stardos+Stencil:700|Alfa+Slab+One|Monda:700" >
+		<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-storage.js"></script>
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Paytone+One|Exo:600|Catamaran|Corben:700|Dosis|Righteous|Stardos+Stencil:700|Titan+One|Alfa+Slab+One|Monda:700" >
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="../../initstyle.css">
 		<link rel="stylesheet" type="text/css" href="style4.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
 	<body>
+		<div id="top" style="display: none;">
+			<div id="dispFull">
+				<div style="text-align: center;">
+				<h3>User Data</h3>
+				<h3 id="closebtn" onclick="closebtn()" style="float: right;font-size: large;">X</h3>
+				</div>
+				<div id="dispBody">
+					<div>
+						<div class="col-lg-4 col-md-12 col-xs-12" id="card1">
+							<div class="card">
+								<h4 class="titletext">PERSONAL DETAILS</h4>				
+								<div class="bodytext">
+									<img id="dippic">
+									<p id="p1">Name</p>
+									<p id="p2">Father's Name</p>
+									<p id="p3">Address</p>
+									<p id="p4">Phone</p>
+									<p id="p5">Emergency Contact</p>
+									<p id="p6">Gender</p>
+									<p id="p7">Date of Birth</p>
+									<p id="p8">Qualification</p>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-lg-4 col-md-12 col-xs-12" id="card2">
+							<div class="card">
+								<h4 class="titletext">RAILWAYS DETAILS</h4>								
+								<div class="bodytext">
+									<p id="p9">Designation</p>
+									<p id="p10">Station</p>
+									<p id="p11">Zone</p>
+									<p id="p12">Division</p>
+									<p id="p13">Department</p>
+									<p id="p14">PF Number</p>
+									<p ><b>Details of last RC/FC attended</b></p>
+									<p id="p15">RC</p>
+									<p id="p16">FC</p>
+									<p id="p17">BCC No</p>
+									<p id="p18">THB NO</p>
+									<p id="p19">ECC NO</p>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-lg-4 col-md-12 col-xs-12" id="card3">
+							<div class="card">
+								<h4 class="titletext">MEDICAL DETAILS</h4>								
+								<div class="bodytext">
+									<p id="p20">Blood Group</p>
+									<p id="p21">Drug allergies</p>
+									<p><b>Medical History</b></p>
+									<p id="p22">BP</p>
+									<p id="p23">Sugar</p>
+									<p id="p24">Heart</p>
+									<p id="p25">Eye</p>
+									<p id="p26">Other Ailments</p>
+									<p id="p27">Other comments</p>
+								</div>
+							</div>		
+						</div>
+					</div>				
+					<table id="courseDet" class="table table-hover table-responsive">
+						<thead style="text-align: center;">
+							<tr>
+								<th id="courseHead" colspan="7">COURSES UNDERTAKEN</th>
+							</tr>
+							<tr>
+								<th rowspan="2">S.No</th>
+								<th rowspan="2">Course ID</th>
+								<th rowspan="2">Batch No</th>
+								<th rowspan="2">Department</th>
+								<th rowspan="2">Course Name</th>
+								<th colspan="2">Duration</th>
+							</tr>
+							<tr>
+								<th>Start</th>
+								<th>End</th>
+							</tr>
+						</thead>
+						<tbody>						
+						</tbody>
+					</table>
+				</div>	
+			</div>
+		</div>
 			<header id="main-header">
 				<div class="container">
 				<h1>S&T TRAINING CENTER, SOUTHERN RAILWAYS PODANUR</h1>
@@ -66,10 +153,14 @@
 							</optgroup>
 
 							<optgroup label="Course Details" style="font-style: italic;">
-
+								<option value="cdept">Department</option>
+								<option value="courseId">Course ID</option>
+								<option value="batchNo">Batch No</option>
+								<option	value="durt">Time Period</option>
 							</optgroup>
 						</select>
 
+						<!-- Personal queries-->
 						<p id="nameNeed" style="display: none;"> 
 							<input id="name" type="text" placeholder="Enter name">
 						</p>
@@ -79,14 +170,14 @@
 						<p id="phSelfNeed" style="display: none;">
 							<input id="phSelf" type="text" placeholder="Enter Phone Number" maxlength="10">
 						</p>
-						<p id="dobNeed" style="display: none;">
+						<p id="dobNeed" style="display: none;">Date of Birth
 							<input id="dob" type="date">
 						</p>
 						<p id="qualNeed" style="display: none;">
 							<input id="qual" type="text" placeholder="Enter Qualification">						
 						</p>
 
-
+						<!-- Railway queries-->
 						<p id="pfNoNeed" style="display: none;"> 
 							<input id="pfNo" type="text" placeholder="Enter PF NO" size="30" maxlength="50">
 						</p>
@@ -99,10 +190,18 @@
 						<p id="stnNeed" style="display: none;">
 							<input id="stn" type="text" placeholder="Enter Station">							
 						</p>
-						<p id="dvsnNeed" style="display: none;">
-							<input id="dvsn" type="text" placeholder="Enter Division">
+						<p id="dvsnNeed" style="display: none;">Division
+							<select id="dvsn">
+								<option value="Chennai">Chennai</option>
+								<option value="Madurai">Madurai</option>
+								<option value="Palakkad">Palakkad</option>
+								<option value="Salem">Salem</option>
+								<option value="Trivandrum">Thiruvananthapuram</option>
+								<option value="Trichy">Tiruchirappalli</option>
+								<option value="Others">Others</option>
+							</select>
 						</p>
-						<p id="zoneNeed" style="display: none;">
+						<p id="zoneNeed" style="display: none;">Zone
 							<select id="zone">
 								<option value="CR">Central Railway, Mumbai CSTM</option>
 								<option value="EC">East Central Railway, Hajipur</option>
@@ -123,7 +222,7 @@
 								<option value="WR">Western Railway, Mumbai (Churchgate)</option>
 							</select>							
 						</p>
-						<p id="deptNeed" style="display: none;">
+						<p id="deptNeed" style="display: none;">Department
 							<select id="dept">
 									<option value="signal">Signal</option>
 									<option value="telecom">Telecom</option>
@@ -140,7 +239,8 @@
 								<input id="eccNo" type="text" placeholder="Enter ECC No.">							
 						</p>
 						
-						<p id="bldGrpNeed" style="display: none">
+						<!-- Medical queries-->
+						<p id="bldGrpNeed" style="display: none">Blood Group
 							<select id="bldGrp">
 								<option value="A+">A+</option>
 								<option value="A-">A-</option>
@@ -151,6 +251,89 @@
 								<option value="O+">O+</option>
 								<option value="O-">O-</option>
 							</select>
+						</p>
+
+						<!-- Course queries-->
+						<p id="cdeptNeed" style="display: none;" onchange="crsechange()">Department
+							<select id="cdept">
+							<option value="" selected disabled>Choose here</option>
+								<option value="Signal">Signal</option>								
+								<option value="Telecom">Telecom</option>								
+								<option value="General">General</option>								
+							</select> 
+						</p>
+						<p id="courseIdNeed" style="display: none;">Course ID
+							<select id="courseId">
+								<option value="" selected disabled>Choose here</option>
+								<optgroup label="Signal Courses" id="crse1" style="font-style: italic;">
+									<option value="INDS">INDS</option>
+									<option value="FS">FS</option>
+									<option value="App.ESM">App.ESM</option>
+									<option value="RSE">RSE</option>
+									<option value="IPJE">IPJE</option>
+									<option value="MSS">MSS</option>
+									<option value="EB">EB</option>
+									<option value="RRIS">RRIS</option>
+									<option value="EMS">EMS</option>
+									<option value="EPMTC">EPMTC</option>
+									<option value="ERE">ERE</option>
+									<option value="EHS">EHS</option>
+									<option value="EIPS">EIPS</option>
+									<option value="AS">AS</option>
+									<option value="EE">EE</option>
+									<option value="PSTS">PSTS</option>
+									<option value="PSHS">PSHS</option> 
+								</optgroup>
+								<optgroup label="Telecom Courses" id="crse2" style="font-style: italic;">
+									<option value="IND">IND</option>
+									<option value="FT">FT</option>
+									<option value="ITA">ITA</option>
+									<option value="RT">RT</option>
+									<option value="MSS">MSS</option>
+									<option value="EDC">EDC</option>
+									<option value="EPDH">EPDH</option>
+									<option value="ETTC">ETTC</option>
+									<option value="PSTT">PSTT</option>
+									<option value="EDFC">EDFC</option>
+									<option value="EISDN">EISDN</option>
+									<option value="EPE">EPE</option>
+									<option value="EMC">EMC</option>
+									<option value="EPAS">EPAS</option>
+									<option value="PSTH">PSTH</option>
+								</optgroup>
+								<optgroup label="General Courses" id="crse3" style="font-style: italic;">
+									<option value="CD&VA">CD & VA</option>
+									<option value="CDM">CDM</option>
+									<option value="YOGA">YOGA</option>
+								</optgroup>
+							</select>
+						</p>
+						<p id="batchNoNeed" style="display: none;">Batch NO:
+							<select id="batchNo" class="req" name="batchNo">
+								<option value="" selected disabled>Choose here</option>
+								<option value="1/18">1/18</option>
+								<option value="2/18">2/18</option>
+								<option value="3/18">3/18</option>
+								<option value="4/18">4/18</option>
+								<option value="5/18">5/18</option>
+								<option value="6/18">6/18</option>
+								<option value="7/18">7/18</option>
+								<option value="8/18">8/18</option>
+								<option value="9/18">9/18</option>
+								<option value="10/18">10/18</option>
+								<option value="11/18">11/18</option>
+								<option value="12/18">12/18</option>
+								<option value="13/18">13/18</option>
+								<option value="14/18">14/18</option>
+								<option value="15/18">15/18</option>
+								<option value="16/18">16/18</option>
+								<option value="17/18">17/18</option>
+								<option value="18/18">18/18</option>
+							</select>
+						</p>
+						<p id="durtNeed" style="display: none;">Duration
+								<input id="durs" type="date" onchange="chkdate()">
+								<input id="dure" type="date" onchange="chkdate()">
 						</p>
 					</p>
 					</div>
@@ -163,30 +346,27 @@
 				<button id="resetbtn" type="button" style="display: none;" onclick="resetfn()">RESET</button>
 				
 				<div id="displayUsers" style="display: none;">
-					<table class="table table-hover table-responsive">
+					<table id="userDet" class="table table-hover table-responsive">
 						<thead>
 							<tr>
 								<th>ID No.</th>
 								<th>Name</th>
-								<th>Father's Name</th>
-								<th>Phone</th>
-								<th>Emergency Contact</th>
-								<th>Blood Group</th>
-								<th>DOB</th>
+								<th>Gender</th>
 								<th>Designation</th>
+								<th>Station</th>
+								<th>Zone</th>
+								<th>Division</th>
+								<th>Department</th>
 							</tr>
 						</thead>
-						<tbody id="userDet">
-						
+						<tbody >						
 						</tbody>
 					</table>
-				</div>
-				
+				</div>				
 			</form>
 			<footer id="main-footer">
-					<p>Copyright &copy; 2018 Designed by VAM</p>
-					</footer>
-					
+				<p>Copyright &copy; 2018 Designed by VAM</p>
+			</footer>	
 		<script src="main4.js"></script>
 	</body>
 </html>

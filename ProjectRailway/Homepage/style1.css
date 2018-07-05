@@ -52,15 +52,14 @@ input#submit:hover{
 	transition-duration:0.2s; 
 	padding: 15px;
 	width: 70%;
-	margin: 20px auto;
-	min-width: 280px;
 	max-width: 350px;
+	margin: 20px auto;
 }
 
 .card img{
 	border-radius: 15px 15px 0 0;
-	width: 300px;
-	height: 300px;
+	max-width: 300px;
+	max-height: 300px;
 	transition-duration:0.2s;
 }
 
@@ -102,27 +101,23 @@ input#submit:hover{
 @media screen and (min-width: 601px) {
 input#submit{
 	  font-size: x-large;
-	}
+	}	
   }
 
 @media screen and (max-width: 600px) {
 	input#submit{
 		font-size: large;
 	}
-
-	.card{
-		min-width: 150px;
-	}	
-	.card:hover{
-		min-width: 150px;
-	}
 	.card img{
-		height: 150px;
-	}
-	.card:hover img{
-		height: 150px;
+		max-height: 200px;
 	}
 	.containe h4{
 		font-size: 12px;
+	}
+	#main-footer{
+		position: relative;
+	}
+	#card3,#card2 {
+		margin-bottom: 20px;
 	}
 }

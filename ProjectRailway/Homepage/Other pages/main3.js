@@ -7,7 +7,7 @@ var config = {
     messagingSenderId: "454464183095"
   };
 firebase.initializeApp(config);
-
+var gloId;
 $(function(){
     
     function dispdata(snapshot){
@@ -28,7 +28,8 @@ $(function(){
             }
             else {
                 alert('The given'+ txt + id + ' does not exist. Please give the correct ID or head over to "Add new Trainees" to create a new user');
-                $('.content').trigger('reset');              
+                $('.content').trigger('reset'); 
+                $('#addDetails')[0].style.display = 'none';             
                 var x = $('.req');
                 for( var i =0; i< x.length ;i++)
                 {
@@ -52,12 +53,14 @@ $(function(){
     }
 
     function addData(txtpath){
-        var courseId = $('#courseId').val();
+        var cdept = $("#dept").val();
+
+        var courseId = $('#crse' + gloId ).val();
         var courseName = $('#courseName').val();
+        var batchNo = $('#batchNo').val();
         var durs = $("#durs").val();
         var dure = $("#dure").val();
-        var dept = $("#dept").val();
-        var othDept = $("#othDept").val();
+        
         var theDataToAdd = glousr;
 
         var usersRef = firebase.database().ref('/Courses/' + txtpath + '/'+theDataToAdd);
@@ -65,15 +68,17 @@ $(function(){
             if (snapshot.exists()) {
                 alert('The course '+courseId+', '+courseName+' has already been registered, please specify only new courses');
                 $('.content').trigger('reset');
+                $()
             }
             else{
+
                 firebase.database().ref('/Courses/' + txtpath + '/' + theDataToAdd).child(courseId).set({
+                cdept,
                 courseId,
                 courseName,
+                batchNo,
                 durs,
                 dure,
-                dept,
-                othDept
                 },function(error){
                     if(error){
                         alert(error);
@@ -82,12 +87,48 @@ $(function(){
                         alert('Course '+courseId+', '+courseName+' is successfully registered' );
                     }
                 });
-                alert('Course '+courseId+', '+courseName+' is successfully registered' );
+                firebase.database().ref('/Courses/' + "cdept" + '/' + cdept).child(theDataToAdd).set({
+                    courseId,
+                    id:theDataToAdd,
+                    courseName,
+                    batchNo,
+                    durs,
+                    dure,
+                });
+
+                firebase.database().ref('/Courses/' + "batchNo" + '/' + batchNo).child(theDataToAdd).set({
+                    cdept,
+                    id:theDataToAdd,
+                    courseId,
+                    courseName,
+                    durs,
+                    dure,
+                });
+
+                
+                firebase.database().ref('/Courses/' + "courseId" + '/' + courseId).child(theDataToAdd).set({
+                    cdept,
+                    id:theDataToAdd,
+                    batchNo,
+                    courseName,
+                    durs,
+                    dure,
+                });
+
+                firebase.database().ref('/Courses/' + "courseId" + '/' + courseId).child(theDataToAdd).set({
+                    cdept,
+                    batchNo,
+                    id:theDataToAdd,
+                    courseName,
+                    durs,
+                    dure,
+                });
+
                 $('.content').trigger('reset');    
             }
         });
     }
-
+    
     var temp = prompt("Do u have a PF number? ( Y / N )");
 
     if(temp == 'N') {
@@ -131,6 +172,18 @@ $(function(){
     }
 });
 
+function chkdate(){
+    if(($('#dure').val()=='') || ($('#durs').val()=='')){
+        return;
+    }
+    if(($('#dure').val()) < ($('#durs').val())){
+        alert('Please choose the dates correctly. Start Date > Ending Date');
+        $('#dure').val("");
+        $('#durs').val("");
+        console.log('hi');
+    }
+}
+
 function logout(){
     firebase.auth().signOut();
 }
@@ -144,19 +197,30 @@ firebase.auth().onAuthStateChanged(user => {
     }
 });
 
-function deptfn(){
-    var x = document.getElementById('dept').value;
+function rem(x, arr){
+    $('#crse' + x)[0].style.display = 'block';
+    $('#crse' + x).required = 'true';
+        
+    for(i in arr){
+        if($('#crse' + arr[i])[0].style.display = 'block'){
+            $('#crse' + arr[i])[0].style.display = 'none';
+            $('#crse' + arr[i])[0].removeAttribute('required');
+        }
+    }
+}
 
-    if( x == 'others'){
-        var y = document.getElementById('deptNeed');
-        y.style.display = 'block';    
-        var z = document.getElementById('othDept');
-        z.required = 'true';
+function crsechange(){
+    var x = $('#dept').val();
+    if(x == "Signal"){
+        rem('1', ["2","3"]);   
+        gloId='1';    
+    }
+    else if(x == "Telecom"){
+        rem('2', ["1","3"]);       
+        gloId='2';    
     }
     else{
-        var y = document.getElementById('deptNeed');
-        y.style.display = 'none';
-        var z = document.getElementById('othDept');
-        z.removeAttribute("required");
+        rem('3', ["1","2"]);       
+        gloId='3';    
     }
 }

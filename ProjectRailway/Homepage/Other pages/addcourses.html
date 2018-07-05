@@ -58,28 +58,94 @@
                 </div>
 
                 <div class="dip" id="addDetails" style="display: none;">
+                    <p>Department: 
+                        <select id="dept" class="req" name="dept" onchange="crsechange()" required>
+                            <option value="" selected disabled>Choose here</option>
+                            <option value="Signal">Signal</option>
+                            <option value="Telecom">Telecom</option>
+                            <option value="General">General</option>
+                        </select>
                     <p>Course ID: 
-                            <input id="courseId" class="req" type="text" name="courseId"  size="30" required>
+                        <select id="crse1" style="display: none;">
+                                <option value="" selected disabled>Choose here</option>
+                                <option value="INDS">INDS</option>
+                            <option value="FS">FS</option>
+                            <option value="App.ESM">App.ESM</option>
+                            <option value="RSE">RSE</option>
+                            <option value="IPJE">IPJE</option>
+                            <option value="MSS">MSS</option>
+                            <option value="EB">EB</option>
+                            <option value="RRIS">RRIS</option>
+                            <option value="EMS">EMS</option>
+                            <option value="EPMTC">EPMTC</option>
+                            <option value="ERE">ERE</option>
+                            <option value="EHS">EHS</option>
+                            <option value="EIPS">EIPS</option>
+                            <option value="AS">AS</option>
+                            <option value="EE">EE</option>
+                            <option value="PSTS">PSTS</option>
+                            <option value="PSHS">PSHS</option>
+                        </select>
+                        <select id="crse2" style="display: none;">
+                                <option value="" selected disabled>Choose here</option>
+                                <option value="IND">IND</option>
+                            <option value="FT">FT</option>
+                            <option value="ITA">ITA</option>
+                            <option value="RT">RT</option>
+                            <option value="MSS">MSS</option>
+                            <option value="EDC">EDC</option>
+                            <option value="EPDH">EPDH</option>
+                            <option value="ETTC">ETTC</option>
+                            <option value="PSTT">PSTT</option>
+                            <option value="EDFC">EDFC</option>
+                            <option value="EISDN">EISDN</option>
+                            <option value="EPE">EPE</option>
+                            <option value="EMC">EMC</option>
+                            <option value="EPAS">EPAS</option>
+                            <option value="PSTH">PSTH</option>
+                        </select>
+                        <select id="crse3" style="display: none;">
+                                <option value="" selected disabled>Choose here</option>
+                                <option value="CD&VA">CD & VA</option>
+                            <option value="CDM">CDM</option>
+                            <option value="YOGA">YOGA</option>
+                        </select>
                     </p>
+                    <p>Batch Number: 
+                            <select id="batchNo" class="req" name="batchNo" required>
+                                   <option value="" selected disabled>Choose here</option>
+
+                                <option value="1/18">1/18</option>
+                                <option value="2/18">2/18</option>
+                                <option value="3/18">3/18</option>
+                                <option value="4/18">4/18</option>
+                                <option value="5/18">5/18</option>
+                                <option value="6/18">6/18</option>
+                                <option value="7/18">7/18</option>
+                                <option value="8/18">8/18</option>
+                                <option value="9/18">9/18</option>
+                                <option value="10/18">10/18</option>
+                                <option value="11/18">11/18</option>
+                                <option value="12/18">12/18</option>
+                                <option value="13/18">13/18</option>
+                                <option value="14/18">14/18</option>
+                                <option value="15/18">15/18</option>
+                                <option value="16/18">16/18</option>
+                                <option value="17/18">17/18</option>
+                                <option value="18/18">18/18</option>
+                            </select>
+                        <p>
                     <p>Course Name: 
                             <input id="courseName" class="req" type="text" name="courseName"  size="30" required>
                     </p>
-                    <p>Duration:
+                   
+                    <p>Duration: Start -> End
                         <div id="dur">
-                        <input id="durs" class="req" type="date" name="durs" required>
-                        <input id="dure" class="req" type="date" name="dure" required>
+                        <input id="durs" class="req" type="date" onchange="chkdate()" name="durs" required>
+                        <input id="dure" class="req" type="date" onchange="chkdate()" name="dure" required>
                         </div>
-                    </p><!--calculate year-->
-                    <p>Department: 
-                        <select id="dept" class="req" name="dept" onchange ="deptfn()" required>
-                                <option value="signal">Signal</option>
-                                <option value="telecom">Telecom</option>
-                                <option value="others">Others</option>
-                            </select>
-                            <p id="deptNeed" style="display: none;"> 
-                                <input id="othDept" type="text" name="othDept" placeholder="Enter department name" size="30" maxlength="500">
-                            </p>
                     </p>
+                   
                     <div class="submitbutton">
                         <button type="submit" id="button2">Submit</button>
                     </div>

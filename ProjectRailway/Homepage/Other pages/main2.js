@@ -9,7 +9,30 @@ var config = {
 firebase.initializeApp(config);
 
 $(function(){
+    var selectedFile;
+
     var temp = prompt("Do u have a PF number? ( Y / N )");
+
+    $('#fileButton').on('change', function(e){
+      selectedFile = e.target.files[0];
+    });
+
+    function uploadfile(str, ids){
+      var uploader = $('#uploader');
+        
+        var storageRef = firebase.storage().ref('/UserPics/' + str + '/' + ids + '.jpg');
+        var task = storageRef.put(selectedFile);
+        task.on('state_changed',
+          function progress(snapshot){
+          },
+          function error(err){
+          },
+          function complete(){
+          
+          }
+        );
+      }  
+
     if(temp == 'N')
     {
       var usr = document.getElementById('pfNo');
@@ -40,7 +63,8 @@ $(function(){
            });
           return theDataToAdd;
       }
-      
+    
+
       $('.content').on('submit',event=>{
         event.preventDefault();
   
@@ -56,9 +80,10 @@ $(function(){
         var desig = $("#desig").val();
         var stn = $("#stn").val();
         var dvsn = $("#dvsn").val();
+        var othdvsn = $("#othdvsn").val();
         var zone = $("#zone").val();
         var dept = $("#dept").val();
-        var othDept = $("#othDept").val();
+        var othdept = $("#othdept").val();
         var pfNo = $("#pfNo").val();
         var detRc = $("#detRc").val();
         var detFc = $("#detFc").val();
@@ -75,8 +100,8 @@ $(function(){
         var otherCmts = $("#otherCmts").val();
         var remarks = $("#remarks").val();
   
-        
         var userid = cnfusr();
+        uploadfile('TempUsers', userid);
         var tempId = userid;
         firebase.database().ref('Users/TempUsers/' + userid).set({
           name,
@@ -91,9 +116,10 @@ $(function(){
           desig,
           stn,
           dvsn,
+          othdvsn,
           zone,
           dept,
-          othDept,
+          othdept,
           pfNo,
           tempId,
           detRc,
@@ -109,7 +135,8 @@ $(function(){
           detHeartDis,
           detEye,
           otherCmts,
-          remarks
+          remarks,
+
         });
   
         alert('Your temp ID is: ' + userid+ ' .Please note this for future applications');
@@ -134,9 +161,10 @@ $(function(){
         var desig = $("#desig").val();
         var stn = $("#stn").val();
         var dvsn = $("#dvsn").val();
+        var othdvsn = $("#othdvsn").val();
         var zone = $("#zone").val();
         var dept = $("#dept").val();
-        var othDept = $("#othDept").val();
+        var othdept = $("#othdept").val();
         var pfNo = $("#pfNo").val();
         var detRc = $("#detRc").val();
         var detFc = $("#detFc").val();
@@ -162,6 +190,7 @@ $(function(){
             location.reload();
           }
           else{
+            uploadfile('PermUsers', pfNo);
             firebase.database().ref('Users/PermUsers/' + pfNo).set({
               name,
               dadname,
@@ -175,9 +204,10 @@ $(function(){
               desig,
               stn,
               dvsn,
+              othdvsn,
               zone,
               dept,
-              othDept,
+              othdept,
               pfNo,
               detRc,
               detFc,
@@ -192,7 +222,7 @@ $(function(){
               detHeartDis,
               detEye,
               otherCmts,
-              remarks
+              remarks,
             });
             alert('User with PF Number ' + pfNo + ' has been created');
           }
@@ -233,24 +263,14 @@ $(function(){
       }
   }
   
-  function deptfn(){
-   
-    var x = document.getElementById('dept').value;
-    
-    if( x == 'others'){
-      var y = document.getElementById('deptNeed');
-      y.style.display = 'block';    
-      var z = document.getElementById('othDept');
-      z.required = 'true';
+  function deptfn(str){
+    var x =$('#' + str).val();
+    if( x == 'Others'){
+      $('#' + str + 'Need')[0].style.display = 'block';
+      $('#oth' + str ).required = 'true';
     }
     else{
-      var y = document.getElementById('deptNeed');
-      y.style.display = 'none';
-      var z = document.getElementById('othDept');
-      z.removeAttribute("required");
-     
+      $('#' + str + 'Need')[0].style.display = 'none';
+      $('#oth' + str )[0].removeAttribute('required');     
     }
-  
-  }
-  
-  
+  }  

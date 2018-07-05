@@ -107,4 +107,10 @@ legend {
 		#navbar a{
 			font-size: large;
 		}
+		.details{
+			margin-bottom: 20px;
+		}
+		#main-footer{
+			position: relative;
+		}
 	}
