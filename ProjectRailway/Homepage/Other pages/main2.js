@@ -242,7 +242,7 @@ $(function(){
         // User is signed in.
       } else {
         // No user is signed in.
-        window.location='../../index.html';
+        history.go(-(history.length - 2));
       }
     });
 
@@ -274,3 +274,8 @@ $(function(){
       $('#oth' + str )[0].removeAttribute('required');     
     }
   }  
+
+  $('#homebut').on('click', function(e){
+    e.preventDefault();
+    history.go(-1);
+  });

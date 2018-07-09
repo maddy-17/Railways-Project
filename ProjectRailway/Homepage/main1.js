@@ -7,10 +7,23 @@ var config = {
   messagingSenderId: "454464183095"
 };
 firebase.initializeApp(config);
+x=1;
+if (window.history && history.pushState && (window.history.length>1)) {
+  addEventListener('load', function() {
+    history.pushState(null, null, null); // creates new history entry with same URL
+    addEventListener('popstate', function() {
+          var stayOnPage = confirm("Would you like to logout?");
+          if (!stayOnPage) {
+          } else {
+              logout();
+            }
+      });    
+  });
+}
 firebase.auth().onAuthStateChanged(user => {
   if (user) {
-    // User is signed in.
-     if(user.email == "admin@sttcsr.com")
+	$('#loading').fadeOut(1000);
+    if(user.email == "admin@sttcsr.com")
     {
       $('#card3')[0].style.display = 'block';
       $('#card3')[0].classList.add('col-lg-4');
@@ -24,14 +37,10 @@ firebase.auth().onAuthStateChanged(user => {
       
     }
   } else {
-    // No user is signed in.
-    window.location='../index.html';
+    history.go(-(history.length - 2));
   }
-});
-
-$(window).on('load', function() {
-	$('#loading').fadeOut(2000);
-});
+}); 
+console.log(document.referrer);
 function logout(){
   firebase.auth().signOut();
 }

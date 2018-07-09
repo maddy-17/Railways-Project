@@ -12,8 +12,8 @@ firebase.auth().onAuthStateChanged(user => {
     if (user) {
         // User is signed in.
     } else {
+        history.go(-(history.length - 2));
         // No user is signed in.
-        window.location='../../index.html';
     }
 });
 
@@ -33,6 +33,17 @@ function resetfn(){
         $('#' + queries[i] + 'Need')[0].style.display = 'none';
         $('#' + queries[i] )[0].removeAttribute("required");  
         qryremove(queries, queries[i]);    
+    }
+    for(i in cqueries){
+        $('#' + cqueries[i] + 'Need')[0].style.display = 'none';
+        if( cqueries[i] == 'durt'){
+            $('#durs').removeAttribute("required");
+            $('#dure').removeAttribute("required");
+            }
+            else{
+                $('#' + cqueries[i] )[0].removeAttribute("required");
+            }
+        qryremove(cqueries, cqueries[i]);    
     }
     $('.content').trigger('reset');   
     $('#resetbtn')[0].style.display = 'none';
@@ -327,3 +338,7 @@ function chkdate(){
         $('#durs').val("");
     }
 }
+$('#homebut').on('click', function(e){
+    e.preventDefault();
+    history.go(-1);
+  });

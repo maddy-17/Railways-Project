@@ -98,13 +98,13 @@ input#submit:hover{
 	position: fixed;
 }
 
-@media screen and (min-width: 601px) {
+@media screen and (min-width: 801px) {
 input#submit{
 	  font-size: x-large;
 	}	
   }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 800px) {
 	input#submit{
 		font-size: large;
 	}

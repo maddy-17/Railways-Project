@@ -34,7 +34,8 @@
 	box-shadow:2px 5px 7px 0 #333; 
 	border-radius: 10px;
 	margin:20px auto;
-	background-color: honeydew;
+	background-color: maroon;
+    color: white;
 	font-family: "Titan One";
 	text-align: center;	
 	overflow: hidden;
@@ -62,17 +63,16 @@
 	box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.8);
 	border-radius: 10px;
 	margin: 5px 0;
-	background-color: white
+	background-color: antiquewhite;
 }
 
 #dispFull {
 	border-radius: 15px;
 	background-color:skyblue;
 	border: 10px black solid;
-	width: 80%;
+	width: 90%;
 	height: 80%;
-	overflow: auto; 
-	padding: 5px;
+	overflow: auto;
 	transition-duration: 0.4s;
 	transition-timing-function: ease-in-out;
 	font-family: 'Catamaran';
@@ -91,6 +91,7 @@
 	border: 3px black solid;
 	box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.8);
 	background-color: white;
+	font-size: 20px;
 }
 
 #card3{
@@ -119,9 +120,6 @@
 
 tbody tr:hover{
 	cursor: pointer;
-}
-
-#dispFull:hover{
 }
 
 form{
@@ -214,7 +212,9 @@ option{
 #main-footer{
     position: relative;
 }
-
+::-webkit-scrollbar { 
+    display: none; 
+}
 select{
 	display: block;
 	width: 90%;
@@ -252,7 +252,7 @@ select:focus{
 	padding: 10px;
 	box-shadow: 4px 7px 20px black;
 }
-@media screen and (min-width: 601px) {
+@media screen and (min-width: 801px) {
 	li, li a{
 		  font-size: x-large;
 	}
@@ -265,7 +265,7 @@ select:focus{
 	min-width: 200px;
 }
 }	
-	@media screen and (max-width: 600px) {
+	@media screen and (max-width: 800px) {
 		li, li a{
 			font-size: large;
 		}
@@ -276,7 +276,13 @@ select:focus{
 			font-size: 25px;
 			min-width: 150px;
 		}
-	
+		#dippic{
+			width: 80%;
+			min-width: 160px;
+		}
+	#courseDet{
+		font-size: 15px;
+	}
 	.bodytext{
 		font-size: 20px;
 	}

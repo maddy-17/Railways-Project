@@ -192,8 +192,8 @@ firebase.auth().onAuthStateChanged(user => {
     if (user) {
         // User is signed in.
     } else {
+        history.go(-(history.length - 2));
         // No user is signed in.
-        window.location='../../index.html';
     }
 });
 
@@ -224,3 +224,7 @@ function crsechange(){
         gloId='3';    
     }
 }
+$('#homebut').on('click', function(e){
+    e.preventDefault();
+    history.go(-1);
+  });

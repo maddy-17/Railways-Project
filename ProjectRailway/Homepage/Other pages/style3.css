@@ -132,7 +132,7 @@ select:focus{
 	margin: 5px 0;
 }
 
-@media screen and (min-width: 601px) {
+@media screen and (min-width: 801px) {
 	li, li a{
 		  font-size: x-large;
 	}
@@ -141,7 +141,7 @@ select:focus{
 }
 
 	
-	@media screen and (max-width: 600px) {
+	@media screen and (max-width: 800px) {
 		li, li a{
 			font-size: large;
 		}
