@@ -24,36 +24,49 @@ var queries = [];
 var cqueries = [];
 var displayedUsers = {};
 
+$('#homebut').on('click', function(e){
+    e.preventDefault();
+    history.go(-1);
+});
+
+function chkdur(www){
+    if(( www.durs >= $('#durs').val()) && (www.dure <= $('#dure').val()) ){
+        return 1;
+    }
+    else{
+        return 0;
+    }
+}
 
 function resetfn(){
+    
     $('#userDet tbody').empty();
     $('#courseDet tbody').empty();
     $('#displayUsers')[0].style.display = 'none';
     for(i in queries){
         $('#' + queries[i] + 'Need')[0].style.display = 'none';
         $('#' + queries[i] )[0].removeAttribute("required");  
-        qryremove(queries, queries[i]);    
     }
+    queries = [];  
     for(i in cqueries){
         $('#' + cqueries[i] + 'Need')[0].style.display = 'none';
         if( cqueries[i] == 'durt'){
             $('#durs').removeAttribute("required");
             $('#dure').removeAttribute("required");
-            }
-            else{
-                $('#' + cqueries[i] )[0].removeAttribute("required");
-            }
-        qryremove(cqueries, cqueries[i]);    
+        }
+        else{
+            $('#' + cqueries[i] )[0].removeAttribute("required");
+        }
     }
+    cqueries = [];              
     $('.content').trigger('reset');   
     $('#resetbtn')[0].style.display = 'none';
-    dislayedUsers = {};
-    console.log(dislayedUsers);
+    displayedUsers = {};
+
 }
 
 function dispUsers(snapshot){
     var usertodisp;
-    console.log(displayedUsers);
     
     if ( snapshot.child('pfNo').val() != ""){
         usertodisp = snapshot.child('pfNo').val();
@@ -66,7 +79,7 @@ function dispUsers(snapshot){
         if( displayedUsers[usertodisp] == 'true')
             return;
     }
-
+    displayedUsers[usertodisp] = 'true';
     var x = document.createElement("tr");
     x.onclick = function(){
         dispFull(snapshot);
@@ -152,7 +165,7 @@ function dispFull(snapshot){
             x.appendChild(y[0]).innerHTML = sno++;
             x.appendChild(y[1]).innerHTML = snapshotx.child('courseId').val();
             x.appendChild(y[2]).innerHTML = snapshotx.child('batchNo').val();
-            x.appendChild(y[3]).innerHTML = snapshotx.child('dept').val();
+            x.appendChild(y[3]).innerHTML = snapshotx.child('cdept').val();
             x.appendChild(y[4]).innerHTML = snapshotx.child('courseName').val();
             x.appendChild(y[5]).innerHTML = snapshotx.child('durs').val();
             x.appendChild(y[6]).innerHTML = snapshotx.child('dure').val();
@@ -172,48 +185,132 @@ function queryDb(txtPath, txtId){
             dispUsers(snapshot);
         });
     }
+ 
 }
-
 function newfn(){
     $('#displayUsers')[0].style.display = 'block';
     var len = queries.length;
-    for(i in queries){
-        len--;
+    if(len){
         for(j in txtPath){
             var x = firebase.database().ref('/Users/' + txtPath[j]);
 
-            x.orderByChild(queries[i]).equalTo($('#' + queries[i]).val()).once('value').then(snaps =>{
+            x.orderByChild(queries[0]).equalTo($('#' + queries[0]).val()).once('value').then(snaps =>{
                 snaps.forEach(function(snapshot){
-                    dispUsers(snapshot);
+                    
+                    flag = 0;
+                    k = 1;
+                    
+                    while(k<len){
+                        if(snapshot.child(queries[k]).val() == $('#' + queries[k]).val()){
+                            k++;continue;
+                        }
+                        else{
+                            flag=1;break;
+                        }
+                        k++;
+                    }
+                    if(flag!=1){   
+                        dispUsers(snapshot);
+                    }
                 });
             });
         }
     }
-    var clen = cqueries.length;
-    for(i in cqueries){
-        clen--;
-        var ref = firebase.database().ref("/Courses/" + cqueries[i] + '/' + $('#' + cqueries).val());
-        ref.on("value", function(snapshot) { 
-            var signal=snapshot.val();
-
-            for(z in signal){
-                var det = signal[z].id;
-                console.log(det);
-
-                if(det.startsWith("TCSR")){
-                    firebase.database().ref('/Users/TempUsers/' + det).once('value').then(yyy=>{
-                        dispUsers(yyy);
-                    });
-                }
-                else{
-                    firebase.database().ref('/Users/PermUsers/' + det).once('value').then(yyy=>{
-                        dispUsers(yyy);
-                    });
-                }
-            }
-         });
-   }
+    if(cqueries.length)
+    {
+        cqueries.sort();
+        console.log(cqueries);
+        if(cqueries[0] == 'durt'){
+            var x = firebase.database().ref('/Courses/durs/');
     
+            x.orderByKey().startAt($('#durs').val()).once('value').then(snaps =>{
+                snaps.forEach(function(snapshot){
+                    var useit = snapshot.val();
+                    for(z in useit)
+                    {
+                        var id = useit[z].id;
+                        if(useit[z].dure <= $('#dure').val()){
+                            if(id.startsWith("TCSR")){
+                                firebase.database().ref('/Users/TempUsers/' + id).once('value').then(yyy=>{
+                                    dispUsers(yyy);
+                                });
+                            }
+                            else{
+                                firebase.database().ref('/Users/PermUsers/' + id).once('value').then(yyy=>{
+                                    dispUsers(yyy);
+                                });
+                            }
+                        }
+                    }
+                    });
+            });
+        }
+        else{
+            clen= cqueries.length;
+    
+            var ref = firebase.database().ref("/Courses/" + cqueries[0] + '/' + $('#' + cqueries[0]).val());
+            ref.on("value", function(snapshoty) { 
+                var wholelist=snapshoty.val();
+                for(z in wholelist){
+                    var det = wholelist[z].id; 
+                    flag = 0;
+                    k = 1;
+                    
+                    while(k<clen){
+                        if(cqueries[k] == "durt"){
+                            if(chkdur(wholelist[z]) == 1){
+                                break;
+                            }
+                            else{
+                                flag = 1;break;
+                            }
+                        }
+                        else{
+                            switch(cqueries[k]){
+                                case "batchNo":
+                                        if(wholelist[z].batchNo == $('#' + cqueries[k]).val()){
+                                            k++;continue;
+                                        }
+                                        else{
+                                            flag=1;break;
+                                        }
+                                        break;
+                                case "cdept":
+                                        if(wholelist[z].cdept == $('#' + cqueries[k]).val()){
+                                            k++;continue;
+                                        }
+                                        else{
+                                            flag=1;break;
+                                        }
+                                        break;
+                                case "courseId":                          
+                                        if(wholelist[z].courseId == $('#' + cqueries[k]).val()){
+                                            k++;continue;
+                                        }
+                                        else{
+                                            flag=1;break;
+                                        }
+                                        break;
+                            }
+                        }
+                    }
+    
+                    if(flag!=1){   
+                        if(det.startsWith("TCSR")){
+                            firebase.database().ref('/Users/TempUsers/' + det).once('value').then(yyy=>{
+                                dispUsers(yyy);
+                            });
+                        }
+                        else{
+                            firebase.database().ref('/Users/PermUsers/' + det).once('value').then(yyy=>{
+                                dispUsers(yyy);
+                            });
+                        }
+                    }                
+                }
+            });
+        }
+    }
 }
 
 $('.content').on('submit',event=>{
@@ -338,7 +435,3 @@ function chkdate(){
         $('#durs').val("");
     }
 }
-$('#homebut').on('click', function(e){
-    e.preventDefault();
-    history.go(-1);
-  });

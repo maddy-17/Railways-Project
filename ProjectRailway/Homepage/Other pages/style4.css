@@ -44,6 +44,10 @@
 .bodytext{
 	font-size: 23px;
 }
+#userload:hover{
+	background-color: rgb(179, 253, 243);
+	cursor: default;
+}
 #top{
 	position: fixed;
 	height: 100vh;

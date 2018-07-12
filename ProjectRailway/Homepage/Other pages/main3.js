@@ -87,13 +87,14 @@ $(function(){
                         alert('Course '+courseId+', '+courseName+' is successfully registered' );
                     }
                 });
-                firebase.database().ref('/Courses/' + "cdept" + '/' + cdept).child(theDataToAdd).set({
+                firebase.database().ref('/Courses/' + "cdept" + '/' + cdept).push({
                     courseId,
                     id:theDataToAdd,
                     courseName,
                     batchNo,
                     durs,
                     dure,
+                    cdept
                 });
 
                 firebase.database().ref('/Courses/' + "batchNo" + '/' + batchNo).child(theDataToAdd).set({
@@ -103,8 +104,8 @@ $(function(){
                     courseName,
                     durs,
                     dure,
+                    batchNo
                 });
-
                 
                 firebase.database().ref('/Courses/' + "courseId" + '/' + courseId).child(theDataToAdd).set({
                     cdept,
@@ -113,13 +114,25 @@ $(function(){
                     courseName,
                     durs,
                     dure,
+                    courseId
                 });
 
-                firebase.database().ref('/Courses/' + "courseId" + '/' + courseId).child(theDataToAdd).set({
+                firebase.database().ref('/Courses/' + "durs" + '/' + durs).child(theDataToAdd).set({
                     cdept,
                     batchNo,
                     id:theDataToAdd,
                     courseName,
+                    courseId,
+                    durs,
+                    dure,
+                });
+
+                firebase.database().ref('/Courses/' + "dure" + '/' + dure).child(theDataToAdd).set({
+                    cdept,
+                    batchNo,
+                    id:theDataToAdd,
+                    courseName,
+                    courseId,
                     durs,
                     dure,
                 });
